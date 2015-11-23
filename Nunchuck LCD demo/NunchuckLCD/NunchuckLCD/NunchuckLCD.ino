@@ -16,26 +16,18 @@
 #include "USART.h"
 #include "NunChuck.h"
 
-
-
 MY_USART serial;
 MI0283QT9 lcd;
 NUNCHUCK nun;
 
-
 volatile int secondcounter = 0;
 
-volatile int timercounter = 0;
+volatile long timercounter = 0;
 
-
-//timer overflow 61 hz
+//timer overflowed 62745 times per second with 0 prescale
 ISR(TIMER2_OVF_vect){
 	
-	
-	
-	if(timercounter >= 7843){
-		serial.sendString("SECOND COUNTER: \n");
-		serial.sendInt(secondcounter);
+	if(timercounter >= 62745){
 		secondcounter++;
 		timercounter = 0;
 	} 
@@ -46,76 +38,77 @@ ISR(TIMER2_OVF_vect){
 
 
 int main(){
-	
 
-	
 	init();
-	
 		
-	
+	//starts lcd
 	lcd.begin();
 	lcd.fillScreen(RGB(255,255,255));
 	
+	//starts serial communication
 	serial.initUSART();
 	serial.sendString("Succesfully initialised USART \n");
 	
-	
-	Wire.begin();
-	serial.sendString("wire begins \n");
+	//starts communication with nunchuck
 	nun.nunchuck_init();
-	serial.sendString("nun works \n");
 	
+	//timer 2 without prescaler, used for timing seconds
+	TCCR2A = 0;
+	TCCR2B = 0;
+	TIMSK2 |= (1 << TOIE2);
+	TCCR2B = (0 << CS22) | (0 << CS21) | (1 << CS20);
+	sei();
 	
+	//refreshing dot by deleting old dot
 	uint16_t oldX = 0;
 	uint16_t oldY = 0;
 	
 	uint16_t dataPosIntegers = 280;
 	
 	
-	
-	//reset timer configuration (in case values had changed)
-		TCCR2A = 0;
-		TCCR2B = 0;
-		
-		//enable Timer2 overflow interrupt:
-		TIMSK2 |= (1 << TOIE2);
-		
-		//set prescaler to 1024:
-		TCCR2B = (0 << CS22) | (0 << CS21) | (1 << CS20);
-		sei();
-	
 	while(1){
 		
+		//second timer on screen
+		lcd.drawText(0, 10, "SEC ", RGB(0,0,0), RGB(255,255,255), 1);
+		lcd.drawInteger(30,10, secondcounter, DEC, RGB(0,0,0), RGB(255,255,255), 1);
 		
-		lcd.drawInteger(10,10, secondcounter / 10, DEC, RGB(0,0,0), RGB(255,255,255), 1);
-		
+		//gets the data from the nunchuck and parses and prints it on the lcd screen
 		if(nun.retreive_data()){
-			
-			
-			lcd.fillCircle(oldX, oldY, 4, RGB(255,255,255));
-			
 			uint8_t x = nun.getJoyX();
 			uint8_t y = nun.getJoyY();
 			
-			lcd.drawInteger(dataPosIntegers, 10, x, DEC, RGB(0,0,0), RGB(255,255,255), 1);
-			lcd.drawInteger(dataPosIntegers, 20, y, DEC, RGB(0,0,0), RGB(255,255,255), 1);
-			lcd.drawInteger(dataPosIntegers, 30, nun.getAccX(), DEC, RGB(0,0,0), RGB(255,255,255), 1);
-			lcd.drawInteger(dataPosIntegers, 40, nun.getAccY(), DEC, RGB(0,0,0), RGB(255,255,255), 1);
-			lcd.drawInteger(dataPosIntegers, 50, nun.getAccZ(), DEC, RGB(0,0,0), RGB(255,255,255), 1);
-			lcd.drawInteger(dataPosIntegers, 50, nun.getC(), DEC, RGB(0,0,0), RGB(255,255,255), 1);
-			lcd.drawInteger(dataPosIntegers, 50, nun.getZ(), DEC, RGB(0,0,0), RGB(255,255,255), 1);
+			lcd.drawLine(dataPosIntegers - 45, 0, dataPosIntegers - 45 , 240, RGB(0,0,0));
 			
+			lcd.drawText(dataPosIntegers - 40, 10, "DATA", RGB(0,0,0), RGB(255,255,255), 1);
 			
+			lcd.drawText(dataPosIntegers - 40, 20, "JoyX:", RGB(0,0,0), RGB(255,255,255), 1);
+			lcd.drawInteger(dataPosIntegers, 20, x, DEC, RGB(0,0,0), RGB(255,255,255), 1);
+			
+			lcd.drawText(dataPosIntegers - 40, 30, "JoyY:", RGB(0,0,0), RGB(255,255,255), 1);
+			lcd.drawInteger(dataPosIntegers, 30, y, DEC, RGB(0,0,0), RGB(255,255,255), 1);
+			
+			lcd.drawText(dataPosIntegers - 40, 40, "AccX:", RGB(0,0,0), RGB(255,255,255), 1);
+			lcd.drawInteger(dataPosIntegers, 40, nun.getAccX(), DEC, RGB(0,0,0), RGB(255,255,255), 1);
+			
+			lcd.drawText(dataPosIntegers - 40, 50, "AccY:", RGB(0,0,0), RGB(255,255,255), 1);
+			lcd.drawInteger(dataPosIntegers, 50, nun.getAccY(), DEC, RGB(0,0,0), RGB(255,255,255), 1);
+			
+			lcd.drawText(dataPosIntegers - 40, 60, "AccZ:", RGB(0,0,0), RGB(255,255,255), 1);
+			lcd.drawInteger(dataPosIntegers, 60, nun.getAccZ(), DEC, RGB(0,0,0), RGB(255,255,255), 1);
+			
+			lcd.drawText(dataPosIntegers - 40, 70, "ButC:", RGB(0,0,0), RGB(255,255,255), 1);
+			lcd.drawInteger(dataPosIntegers, 70, nun.getC(), DEC, RGB(0,0,0), RGB(255,255,255), 1);
+			
+			lcd.drawText(dataPosIntegers - 40, 80, "ButZ:", RGB(0,0,0), RGB(255,255,255), 1);
+			lcd.drawInteger(dataPosIntegers, 80, nun.getZ(), DEC, RGB(0,0,0), RGB(255,255,255), 1);
+			
+			//dot
+			lcd.fillCircle(oldX, oldY, 4, RGB(255,255,255));
 			lcd.fillCircle(x, y, 4, RGB(255, 0, 0));
 			
 			oldX = x;
-			oldY = y;
-			
-			
+			oldY = y;		
 		}
-		
-		
-		
 		
 		
 	}

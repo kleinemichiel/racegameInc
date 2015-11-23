@@ -14,7 +14,7 @@
 #include "NunChuck.h"
 
 //data container
-char NUNCHUCK::nunDataArr[5];
+char NUNCHUCK::nunDataArr[6];
 
 //starts handshake with nunchuck
 uint8_t NUNCHUCK::nunchuck_init(){
@@ -22,7 +22,6 @@ uint8_t NUNCHUCK::nunchuck_init(){
 	Wire.beginTransmission(NUNADDRESS);
 	Wire.write(0x40);
 	Wire.write(DATARQ);
-	Wire.flush();
 	if(Wire.endTransmission() == 0){
 		return 1;
 	} else {
@@ -35,7 +34,6 @@ uint8_t NUNCHUCK::nunchuck_init(){
 uint8_t NUNCHUCK::request_data(){
 	Wire.beginTransmission(NUNADDRESS);
 	Wire.write(DATARQ);
-	Wire.flush();
 	if(Wire.endTransmission() == 0){
 		return 1;
 	} else {
@@ -65,7 +63,7 @@ uint8_t NUNCHUCK::retreive_data(){
 	
 	request_data();
 	
-	if(nunDataArr[4] != NULL){
+	if(nunDataArr[5] != NULL){
 		return 1;
 	} else {
 		return 0;
@@ -124,7 +122,7 @@ uint8_t NUNCHUCK::getAccZ(){
 
 //returns true or false where true is button c pressed
 uint8_t NUNCHUCK::getC(){
-	if(nunDataArr[1] != NULL){
+	if(nunDataArr[5] != NULL){
 		return (((nunDataArr[5] & 0x02) >> 1) ^ 0x01) ;
 	} else {
 		return 0;
@@ -133,7 +131,7 @@ uint8_t NUNCHUCK::getC(){
 
 //returns true or false where true is button z pressed
 uint8_t NUNCHUCK::getZ(){
-	if(nunDataArr[1] != NULL){
+	if(nunDataArr[5] != NULL){
 		return ((nunDataArr[5] & 0x01) ^ 0x01);
 	} else {
 		return 0;

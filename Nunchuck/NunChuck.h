@@ -23,7 +23,7 @@ class NUNCHUCK
 	uint8_t retreive_data(void);
 	
 	//storing data
-	static char nunDataArr[5];	
+	static char nunDataArr[6];	
 	
 	//parsing data
 	uint8_t getJoyX(void);
