@@ -25,5 +25,5 @@ class MENUOBJECTS
 #endif /* MENUOBJECTS_H_ */
 
 //default colors
-#define BACKGROUND RGB(255,0,0)
-#define OBJECTCOLOR RGB(0,0,0)
+#define OBJECTCOLOR RGB(255,0,0)
+#define BACKGROUND RGB(0,0,0)

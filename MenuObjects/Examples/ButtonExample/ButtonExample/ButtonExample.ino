@@ -77,15 +77,15 @@ int main(){
 	}
 	
 	//sets background to red
-	lcd.fillScreen(RGB(255,0,0));
+	lcd.fillScreen(BACKGROUND);
 	while(1){
 		
 		//creates test buttons
 		//drawButton(lcd, string, x, y, width, height)
-		uint8_t test = obj.drawButton(lcd, "test", 15, 15, 150, 40);
-		uint8_t itworks = obj.drawButton(lcd, "it works :D", 15, 90, 200, 40);
-		uint8_t centering = obj.drawButton(lcd, "centering TM", 15, 150, 200, 40);
-		uint8_t touching = obj.drawButton(lcd, "a", 15, 220, 200, 40);
+		uint8_t test = obj.drawButton(lcd, "test", 20, 15, 150, 40);
+		uint8_t itworks = obj.drawButton(lcd, "it works :D", 20, 90, 200, 40);
+		uint8_t centering = obj.drawButton(lcd, "centering TM", 20, 150, 200, 40);
+		uint8_t touching = obj.drawButton(lcd, "a", 20, 220, 200, 40);
 		
 		//testing if buttons work by printing them
 		if(test){
