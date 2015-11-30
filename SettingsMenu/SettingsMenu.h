@@ -13,6 +13,14 @@
 #include "USART.h"
 #include "menuObjects.h"
 
+//global values accessable by any other libary included below this library
+extern uint8_t realTime;
+extern uint8_t preTime;
+
+extern uint8_t easy;
+extern uint8_t medium;
+extern uint8_t hard;
+
 //makes it possible to use this function without defining a class, so you dont have to define a type for the class in the main program, easier and less messy
 extern void showSettingMenu(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial);
 

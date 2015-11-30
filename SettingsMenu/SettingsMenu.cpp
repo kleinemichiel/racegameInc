@@ -8,12 +8,12 @@
 #include "SettingsMenu.h"
 
 //these are values which are being set in the setting menu
-uint8_t realTime = 0;
-uint8_t preTime = 0;
+extern uint8_t realTime = 0;
+extern uint8_t preTime = 0;
 
-uint8_t easy = 0;
-uint8_t medium = 0;
-uint8_t hard = 0;
+extern uint8_t easy = 0;
+extern uint8_t medium = 0;
+extern uint8_t hard = 0;
 
 
 
@@ -27,7 +27,7 @@ void showDifficulty(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 	
 	while(1){
 		//drawing checkboxes and text on screen
-		lcd.drawText(15, 15, "Difficulty", OBJECTCOLOR, BACKGROUND, 3);
+		lcd.drawText(5, 5, "difficulty", OBJECTCOLOR, BACKGROUND, 3);
 		
 		lcd.drawText(15, 80 , "EASY  :", OBJECTCOLOR, BACKGROUND, 2);
 		obj.drawCheckbox(lcd, 177, (87 - 24), 48, &easy);
@@ -58,7 +58,7 @@ void showDifficulty(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 		
 		
 		if(easy && up){
-			serial.sendString("easy\n");
+			//serial.sendString("easy\n");
 			if(medium){
 				easy = 0;
 				up = 0;
@@ -73,7 +73,7 @@ void showDifficulty(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 		}
 		
 		if(medium && !up && !down){
-			serial.sendString("medium\n");
+			//serial.sendString("medium\n");
 			if(easy){
 				medium = 0;
 				up = 1;
@@ -88,7 +88,7 @@ void showDifficulty(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 		}
 		
 		if(hard && down){
-			serial.sendString("hard\n");
+			//serial.sendString("hard\n");
 			if(medium){
 				hard = 0;
 				up = 0;
@@ -102,9 +102,9 @@ void showDifficulty(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 			}
 		}
 		
-		if(!easy && !medium && !hard){
-			serial.sendString("nothing");
-		}
+		// if(!easy && !medium && !hard){
+		// 	serial.sendString("nothing");
+		// }
 		
 		
 		if(obj.drawButton(lcd, "Back", 20, 270, 200, 40)){
@@ -122,7 +122,6 @@ void showGenerator(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 	uint8_t start = 0;
 	while(1){
 		
-		lcd.drawText(0, 310, "generator settings v3", OBJECTCOLOR, BACKGROUND, 1);
 		char title[] = "Generator";
 		uint8_t lengthOfString = (strlen(title) * 26);
 		uint8_t x = (240 - lengthOfString);
@@ -147,7 +146,7 @@ void showGenerator(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 		}
 		
 		if(preTime && up){
-			serial.sendString("preTime selected \n");
+			//serial.sendString("preTime selected \n");
 			
 			if(realTime){
 				preTime = 0;
@@ -158,7 +157,7 @@ void showGenerator(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 		} 
 		
 		if(realTime && down){
-			serial.sendString("realTime selected\n");
+			//serial.sendString("realTime selected\n");
 			if(preTime){
 				realTime = 0;
 				up = 1;
@@ -181,7 +180,6 @@ extern void showSettingMenu(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 	
 	while(1){
 		
-		lcd.drawText(0, 310, "settings v1", OBJECTCOLOR, BACKGROUND, 1);
 		char title[] = "Settings";
 		uint8_t lengthOfString = (strlen(title) * 26); 
 		uint8_t x = (240 - lengthOfString);
