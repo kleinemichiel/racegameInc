@@ -13,7 +13,7 @@ uint8_t setValue = 0;
 
 extern void showMainMenu(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 	
-	
+	lcd.fillScreen(BACKGROUND);
 	while(1){
 		
 		char title[] = "Settings";
