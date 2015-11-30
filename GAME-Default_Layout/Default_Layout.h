@@ -8,9 +8,8 @@
 
 #ifndef DEFAULT_LAYOUT_H_
 #define DEFAULT_LAYOUT_H_
-
 #include "MI0283QT9.h"
-
+#include "USART.h"
 extern void showDefaultLayout(MI0283QT9 lcd, MY_USART serial);
 
 #endif /* DEFAULT_LAYOUT_H_ */
