@@ -27,7 +27,7 @@ void showDifficulty(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 	
 	while(1){
 		//drawing checkboxes and text on screen
-		lcd.drawText(5, 5, "difficulty", OBJECTCOLOR, BACKGROUND, 3);
+		lcd.drawText(0, 15, "Difficulty", OBJECTCOLOR, BACKGROUND, 3);
 		
 		lcd.drawText(15, 80 , "EASY  :", OBJECTCOLOR, BACKGROUND, 2);
 		obj.drawCheckbox(lcd, 177, (87 - 24), 48, &easy);
@@ -177,6 +177,7 @@ void showGenerator(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 //main menu with buttons for accesing sub menus 
 extern void showSettingMenu(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 	
+	lcd.fillScreen(BACKGROUND);
 	
 	while(1){
 		
