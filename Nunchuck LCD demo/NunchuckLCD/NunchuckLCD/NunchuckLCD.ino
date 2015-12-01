@@ -63,7 +63,7 @@ int main(){
 	uint16_t oldX = 0;
 	uint16_t oldY = 0;
 	
-	uint16_t dataPosIntegers = 280;
+	uint16_t dataPosIntegers = 260;
 	
 	
 	while(1){
@@ -102,9 +102,22 @@ int main(){
 			lcd.drawText(dataPosIntegers - 40, 80, "ButZ:", RGB(0,0,0), RGB(255,255,255), 1);
 			lcd.drawInteger(dataPosIntegers, 80, nun.getZ(), DEC, RGB(0,0,0), RGB(255,255,255), 1);
 			
+			if(nun.getAccMovementLR() == 1){
+				lcd.drawText(dataPosIntegers - 40, 90, "LRMov:", RGB(0,0,0), RGB(255,255,255), 1);
+				lcd.drawText(dataPosIntegers, 90, "Right", RGB(0,0,0), RGB(255,255,255), 1);
+			} else if(nun.getAccMovementLR() == 2){
+				lcd.drawText(dataPosIntegers - 40, 90, "LRMov:", RGB(0,0,0), RGB(255,255,255), 1);
+				lcd.drawText(dataPosIntegers, 90, "Left", RGB(0,0,0), RGB(255,255,255), 1);
+			} else {
+				lcd.drawText(dataPosIntegers - 40, 90, "LRMov:", RGB(0,0,0), RGB(255,255,255), 1);
+				lcd.drawText(dataPosIntegers, 90, "MID", RGB(0,0,0), RGB(255,255,255), 1);
+			}
+			
 			//dot
 			lcd.fillCircle(oldX, oldY, 4, RGB(255,255,255));
 			lcd.fillCircle(x, y, 4, RGB(255, 0, 0));
+			
+			serial.sendInt(nun.getAccX());
 			
 			oldX = x;
 			oldY = y;		

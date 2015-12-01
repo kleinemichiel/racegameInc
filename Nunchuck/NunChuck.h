@@ -28,11 +28,12 @@ class NUNCHUCK
 	//parsing data
 	uint8_t getJoyX(void);
 	uint8_t getJoyY(void);
-	uint8_t getAccX(void);
-	uint8_t getAccY(void);
-	uint8_t getAccZ(void);
+	int8_t getAccX(void);
+	int8_t getAccY(void);
+	int8_t getAccZ(void);
 	uint8_t getC(void);
 	uint8_t getZ(void);
+	uint8_t getAccMovementLR(void);
 	
 	
 	private:

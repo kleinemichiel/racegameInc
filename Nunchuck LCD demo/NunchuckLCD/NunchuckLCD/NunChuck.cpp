@@ -91,9 +91,9 @@ uint8_t NUNCHUCK::getJoyY(){
 }
 
 //returns the position of the accellerometer on the x axle as a 10 bit value
-uint8_t NUNCHUCK::getAccX(){
+int8_t NUNCHUCK::getAccX(){
 	if(nunDataArr[2] != NULL){
-		uint8_t first8bitsX = (nunDataArr[2]);
+		int8_t first8bitsX = (nunDataArr[2]);
 		return first8bitsX;
 	} else {
 		return 0;
@@ -101,9 +101,9 @@ uint8_t NUNCHUCK::getAccX(){
 }
 
 //returns the position of the accellerometer on the y axle as a 10 bit value
-uint8_t NUNCHUCK::getAccY(){
+int8_t NUNCHUCK::getAccY(){
 	if(nunDataArr[3] != NULL){
-		uint8_t first8bitsY = (nunDataArr[3]);
+		int8_t first8bitsY = (nunDataArr[3]);
 		return first8bitsY;
 	} else {
 		return 0;
@@ -111,9 +111,9 @@ uint8_t NUNCHUCK::getAccY(){
 }
 
 //returns the position of the accellerometer on the z axle as a 10 bit value
-uint8_t NUNCHUCK::getAccZ(){
+int8_t NUNCHUCK::getAccZ(){
 	if(nunDataArr[4] != NULL){
-		uint8_t first8bitsZ = (nunDataArr[4]);
+		int8_t first8bitsZ = (nunDataArr[4]);
 		return first8bitsZ;
 	} else {
 		return 0;
@@ -140,4 +140,13 @@ uint8_t NUNCHUCK::getZ(){
 
 
 
-
+uint8_t NUNCHUCK::getAccMovementLR(){
+	if(getAccX() < 0){
+		return 1;
+	} else if(getAccX() > 0 && getAccX() < 90){
+		return 2;
+	} else {
+		return 0;
+	}
+	
+}

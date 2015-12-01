@@ -42,6 +42,7 @@
     <ListValues>
       <Value>__AVR_ATmega328p__</Value>
       <Value>__AVR_ATmega328P__</Value>
+      <Value>_VMDEBUG=1</Value>
       <Value>ARDUINO=165</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=16000000L</Value>
@@ -55,13 +56,14 @@
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
-      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/utility</Value>
-      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire</Value>
-      <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers/VM_DBG</Value>
       <Value>C:/Users/Eldin/Documents/Arduino/libraries</Value>
       <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI</Value>
       <Value>../../NunchuckLCD</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
@@ -78,6 +80,7 @@
     <ListValues>
       <Value>__AVR_ATmega328p__</Value>
       <Value>__AVR_ATmega328P__</Value>
+      <Value>_VMDEBUG=1</Value>
       <Value>ARDUINO=165</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=16000000L</Value>
@@ -91,13 +94,14 @@
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
-      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/utility</Value>
-      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire</Value>
-      <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers/VM_DBG</Value>
       <Value>C:/Users/Eldin/Documents/Arduino/libraries</Value>
       <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI</Value>
       <Value>../../NunchuckLCD</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
@@ -111,7 +115,12 @@
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard;../../NunchuckLCD;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;C:/Users/Eldin/Documents/Arduino/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers/VM_DBG;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/utility;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard;../../NunchuckLCD;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;C:/Users/Eldin/Documents/Arduino/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers/VM_DBG;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/utility;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI/utility;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/EEPROM;</VMSETTING_IncludePaths>
+    <VisualMicroSettings>
+      <VisualMicroSettings>
+        <arduino.upload.port>COM3</arduino.upload.port>
+      </VisualMicroSettings>
+    </VisualMicroSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
@@ -127,6 +136,7 @@
     <ListValues>
       <Value>__AVR_ATmega328p__</Value>
       <Value>__AVR_ATmega328P__</Value>
+      <Value>_VMDEBUG=1</Value>
       <Value>ARDUINO=165</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=16000000L</Value>
@@ -140,13 +150,14 @@
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
-      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/utility</Value>
-      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire</Value>
-      <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers/VM_DBG</Value>
       <Value>C:/Users/Eldin/Documents/Arduino/libraries</Value>
       <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI</Value>
       <Value>../../NunchuckLCD</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
@@ -163,6 +174,7 @@
     <ListValues>
       <Value>__AVR_ATmega328p__</Value>
       <Value>__AVR_ATmega328P__</Value>
+      <Value>_VMDEBUG=1</Value>
       <Value>ARDUINO=165</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=16000000L</Value>
@@ -176,13 +188,14 @@
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
-      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/utility</Value>
-      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire</Value>
-      <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers/VM_DBG</Value>
       <Value>C:/Users/Eldin/Documents/Arduino/libraries</Value>
       <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI</Value>
       <Value>../../NunchuckLCD</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard</Value>
       <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
@@ -196,10 +209,111 @@
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard;../../NunchuckLCD;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;C:/Users/Eldin/Documents/Arduino/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers/VM_DBG;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/utility;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard;../../NunchuckLCD;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;C:/Users/Eldin/Documents/Arduino/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers/VM_DBG;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/utility;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI/utility;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/EEPROM;</VMSETTING_IncludePaths>
+    <VisualMicroSettings>
+      <VisualMicroSettings>
+        <arduino.upload.port>COM3</arduino.upload.port>
+      </VisualMicroSettings>
+    </VisualMicroSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ADS7846.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ADS7846.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BMPheader.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="cmd.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="digitalWriteFast.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DisplayI2C.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DisplayI2C.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DisplaySPI.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DisplaySPI.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="fonts.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="font_10x16.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="font_12x16.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="font_12x20.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="font_16x26.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="font_4x6.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="font_5x12.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="font_5x8.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="font_6x10.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="font_6x8.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="font_7x12.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="font_8x12.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="font_8x14.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="font_8x8.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="glcdfont.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="GraphicsLib.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="GraphicsLib.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MI0283QT9.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MI0283QT9.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="NunChuck.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="NunChuck.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="NunchuckLCD.ino">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="USART.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="USART.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Visual Micro\.NunchuckLCD.vsarduino.h">
