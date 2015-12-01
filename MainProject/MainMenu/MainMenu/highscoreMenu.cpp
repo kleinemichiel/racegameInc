@@ -7,8 +7,6 @@
 
 #include "highscoreMenu.h"
 
-uint8_t setValue = 0;
-
 extern void showHighscoreMenu(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 	
 	lcd.fillScreen(BACKGROUND);
