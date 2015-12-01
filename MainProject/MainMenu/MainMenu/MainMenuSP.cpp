@@ -7,6 +7,7 @@
 
 #include "MainMenuSP.h"
 #include "SettingsMenu.h"
+#include "highscoreMenu.h"
 
 
 uint8_t setValue = 0;
@@ -28,7 +29,7 @@ extern void showMainMenu(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 			showSettingMenu(lcd,obj,serial);
 		}
 		if(obj.drawButton(lcd, "Highscore", 20, 195, 200, 40)){
-			
+			showHighscoreMenu(lcd,obj,serial);
 		}
 		
 	}
