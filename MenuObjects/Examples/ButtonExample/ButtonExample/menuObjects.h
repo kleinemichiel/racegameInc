@@ -11,7 +11,7 @@
 #define MENUOBJECTS_H_
 
 //necessary includes, in case not included on main program
-#include <stdint.h>
+//#include <stdint.h>
 #include <avr/delay.h>
 #include "MI0283QT9.h"
 
@@ -19,8 +19,8 @@ class MENUOBJECTS
 {
 
 	public:
-	uint8_t drawButton(MI0283QT9 lcd, char text[], uint16_t x, uint16_t y, uint16_t w, uint16_t h);	
-	
+	uint8_t drawButton(MI0283QT9 lcd, char text[], uint16_t x, uint16_t y, uint16_t w, uint16_t h);
+	void drawCheckbox(MI0283QT9 lcd, uint16_t x, uint16_t y, uint16_t s, uint8_t *setValue);	
 };
 #endif /* MENUOBJECTS_H_ */
 

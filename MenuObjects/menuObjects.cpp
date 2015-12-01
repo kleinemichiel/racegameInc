@@ -54,7 +54,6 @@ void MENUOBJECTS::drawCheckbox(MI0283QT9 lcd, uint16_t x, uint16_t y, uint16_t s
 	
 	if(lcd.touchZ() && lcd.touchX() >= x && lcd.touchX() <= (x + s) && lcd.touchY() >= y && lcd.touchY() <= (y + s))
 	{
-		lcd.drawText(0, 250, "pressed", OBJECTCOLOR, BACKGROUND, 1);
 		if(!*setValue){
 			*setValue = 1;
 			lcd.fillRect(x, y,s,s, OBJECTCOLOR);
