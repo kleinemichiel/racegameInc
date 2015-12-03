@@ -10,6 +10,11 @@
 #define INCFILE1_H_
 
 #include "stdint.h"
+#include "GridLayout.h"
+
+extern void drawCar(MI0283QT9 lcd, MY_USART serial, uint8_t x, uint8_t y);
+extern void drawTruck(MI0283QT9 lcd, MY_USART serial, uint8_t x, uint8_t y);
+
 struct car
 {
 	uint8_t lengte =1;
