@@ -8,10 +8,10 @@
 #include "SettingsMenu.h"
 
 //these are values which are being set in the setting menu
-extern uint8_t realTime = 0;
+extern uint8_t realTime = 1;
 extern uint8_t preTime = 0;
 
-extern uint8_t easy = 0;
+extern uint8_t easy = 1;
 extern uint8_t medium = 0;
 extern uint8_t hard = 0;
 
