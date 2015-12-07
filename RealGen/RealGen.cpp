@@ -7,6 +7,7 @@
 #include "RealGen.h"
 
 
+
  objects object[2];
  
  uint8_t posYobj1 = 0;
@@ -33,9 +34,9 @@ extern void genNewObjects(uint8_t objectReGen)
 {
 	uint8_t rPosX = rand() % 5;
 	
-	uint8_t r = rand() % 205 + 50;
-	uint8_t g = rand() % 205 + 50;
-	uint8_t b = rand() % 205 + 50;
+	uint8_t r = rand() % 105 + 150;
+	uint8_t g = rand() % 105 + 150;
+	uint8_t b = rand() % 105 + 150;
 	
 	object[objectReGen].posX = rPosX;
 	object[objectReGen].posY = 0;
@@ -70,7 +71,7 @@ void initGenObjects(){
 
 
 uint8_t onBegin = 0;
-
+uint8_t counter =0;
 //shows the objects on screen - this loop is a example loop on how to print the objects!
 extern void showGenObjects(MI0283QT9 lcd, MY_USART serial){
 	
@@ -79,7 +80,53 @@ extern void showGenObjects(MI0283QT9 lcd, MY_USART serial){
 		 onBegin = 1;
 	}
 	//_delay_ms(150);
+	if(hard == 1 && counter == 8){
+		counter = 0;
+		uint8_t operatordefine;
 	
+		if(object[0].posX == 4){
+			object[0].posX--;
+		}else if(object[0].posX == 0){
+			object[0].posX++;
+		}else if(object[0].posX != 0 && object[0].posX != 4){
+			operatordefine = rand() % 2 + 1;
+			if(operatordefine == 1){
+				object[0].posX++;
+			}else{
+				object[0].posX--;
+			}
+	
+		}
+	
+		if(object[1].posX == 4){
+			object[1].posX--;
+		}else if(object[1].posX == 0){
+			object[1].posX++;
+		}else if(object[1].posX != 0 && object[1].posX != 4){
+			operatordefine = rand() % 2 + 1;
+			if(operatordefine == 1){
+				object[1].posX++;
+			}else{
+				object[1].posX--;
+			}
+		}
+		
+		
+		if(object[2].posX == 4){
+			object[2].posX--;
+		}else if(object[2].posX == 0){
+			object[2].posX++;
+		}else if(object[2].posX != 0 && object[1].posX != 4){
+			operatordefine = rand() % 2 + 1;
+			if(operatordefine == 1){
+				object[2].posX++;
+				}else{
+				object[2].posX--;
+			}
+		}
+		
+	}
+		
 	uint8_t yCompare = GRIDYLENGTH + 7;
 	
 	if(posYobj1 == yCompare){
@@ -158,6 +205,7 @@ extern void showGenObjects(MI0283QT9 lcd, MY_USART serial){
 		posYobj3++;
 		keepObj3Alive = 1;
 	}
-	
+	counter++;
 }
+	
 
