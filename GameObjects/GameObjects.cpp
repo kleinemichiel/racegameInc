@@ -5,30 +5,30 @@ extern void drawCar (MI0283QT9 lcd, MY_USART serial, uint8_t x, uint8_t y, uint8
 	lcd.drawRect(pixelPosX(x), pixelPosY(y), 40, 64, RGB(rgb[0],rgb[1],rgb[2]));
 	
 	
-	lcd.drawLine(pixelPosX(x),pixelPosY(y+16),pixelPosX(x)+10, pixelPosY(y)+26, RGB(rgb[0],rgb[1],rgb[2]));
-	lcd.drawLine(pixelPosX(x)+40,pixelPosY(y+16),pixelPosX(x)+30, pixelPosY(y)+26, RGB(rgb[0],rgb[1],rgb[2]));
+	lcd.drawLine(pixelPosX(x)+1,pixelPosY(y)+16,pixelPosX(x)+10, pixelPosY(y)+26, RGB(rgb[0],rgb[1],rgb[2]));
+	lcd.drawLine(pixelPosX(x)+39,pixelPosY(y)+16,pixelPosX(x)+30, pixelPosY(y)+26, RGB(rgb[0],rgb[1],rgb[2]));
 	lcd.drawLine(pixelPosX(x)+10,pixelPosY(y)+26,pixelPosX(x)+30, pixelPosY(y)+26, RGB(rgb[0],rgb[1],rgb[2]));
 	lcd.drawLine(pixelPosX(x)+10,pixelPosY(y)+38,pixelPosX(x)+30, pixelPosY(y)+38, RGB(rgb[0],rgb[1],rgb[2]));
-	lcd.drawLine(pixelPosX(x),pixelPosY(y)+48,pixelPosX(x)+10, pixelPosY(y)+38, RGB(rgb[0],rgb[1],rgb[2]));
-	lcd.drawLine(pixelPosX(x)+40,pixelPosY(y)+48,pixelPosX(x)+30, pixelPosY(y)+38, RGB(rgb[0],rgb[1],rgb[2]));
+	lcd.drawLine(pixelPosX(x)+1,pixelPosY(y)+48,pixelPosX(x)+10, pixelPosY(y)+38, RGB(rgb[0],rgb[1],rgb[2]));
+	lcd.drawLine(pixelPosX(x)+39,pixelPosY(y)+48,pixelPosX(x)+30, pixelPosY(y)+38, RGB(rgb[0],rgb[1],rgb[2]));
 	lcd.drawLine(pixelPosX(x)+10,pixelPosY(y)+26,pixelPosX(x)+10, pixelPosY(y)+38, RGB(rgb[0],rgb[1],rgb[2]));
-	lcd.drawLine(pixelPosX(x)+30,pixelPosY(y)+16,pixelPosX(x)+30, pixelPosY(y)+38, RGB(rgb[0],rgb[1],rgb[2]));
-	lcd.drawLine(pixelPosX(x),pixelPosY(y)+16,pixelPosX(x)+40, pixelPosY(y)+16, RGB(rgb[0],rgb[1],rgb[2]));
-	lcd.drawLine(pixelPosX(x),pixelPosY(y)+48,pixelPosX(x)+40, pixelPosY(y)+48, RGB(rgb[0],rgb[1],rgb[2]));
+	lcd.drawLine(pixelPosX(x)+30,pixelPosY(y)+26,pixelPosX(x)+30, pixelPosY(y)+38, RGB(rgb[0],rgb[1],rgb[2]));
+	lcd.drawLine(pixelPosX(x),pixelPosY(y)+16,pixelPosX(x)+38, pixelPosY(y)+16, RGB(rgb[0],rgb[1],rgb[2]));
+	lcd.drawLine(pixelPosX(x),pixelPosY(y)+48,pixelPosX(x)+38, pixelPosY(y)+48, RGB(rgb[0],rgb[1],rgb[2]));
 	
 	
 }
 //removes car
 extern void removeCar(MI0283QT9 lcd, MY_USART serial, uint8_t x, uint8_t y){
 	
-	lcd.drawLine(pixelPosX(x),pixelPosY(y+16),pixelPosX(x)+10, pixelPosY(y)+26, BACKGROUND);
-	lcd.drawLine(pixelPosX(x)+40,pixelPosY(y+16),pixelPosX(x)+30, pixelPosY(y)+26, BACKGROUND);
+	lcd.drawLine(pixelPosX(x)+1,pixelPosY(y)+16,pixelPosX(x)+10, pixelPosY(y)+26, BACKGROUND);
+	lcd.drawLine(pixelPosX(x)+39,pixelPosY(y)+16,pixelPosX(x)+30, pixelPosY(y)+26, BACKGROUND);
 	lcd.drawLine(pixelPosX(x)+10,pixelPosY(y)+26,pixelPosX(x)+30, pixelPosY(y)+26, BACKGROUND);
 	lcd.drawLine(pixelPosX(x)+10,pixelPosY(y)+38,pixelPosX(x)+30, pixelPosY(y)+38, BACKGROUND);
-	lcd.drawLine(pixelPosX(x),pixelPosY(y)+48,pixelPosX(x)+10, pixelPosY(y)+38, BACKGROUND);
-	lcd.drawLine(pixelPosX(x)+40,pixelPosY(y)+48,pixelPosX(x)+30, pixelPosY(y)+38, BACKGROUND);
+	lcd.drawLine(pixelPosX(x)+1,pixelPosY(y)+48,pixelPosX(x)+10, pixelPosY(y)+38, BACKGROUND);
+	lcd.drawLine(pixelPosX(x)+39,pixelPosY(y)+48,pixelPosX(x)+30, pixelPosY(y)+38, BACKGROUND);
 	lcd.drawLine(pixelPosX(x)+10,pixelPosY(y)+26,pixelPosX(x)+10, pixelPosY(y)+38, BACKGROUND);
-	lcd.drawLine(pixelPosX(x)+30,pixelPosY(y)+16,pixelPosX(x)+30, pixelPosY(y)+38, BACKGROUND);
+	lcd.drawLine(pixelPosX(x)+30,pixelPosY(y)+26,pixelPosX(x)+30, pixelPosY(y)+38, BACKGROUND);
 	lcd.drawLine(pixelPosX(x),pixelPosY(y)+16,pixelPosX(x)+40, pixelPosY(y)+16, BACKGROUND);
 	lcd.drawLine(pixelPosX(x),pixelPosY(y)+48,pixelPosX(x)+40, pixelPosY(y)+48, BACKGROUND);
 
