@@ -35,14 +35,14 @@ struct truck
 
 
 //holds information for all the objects which are going to be printed on screen
-struct objects
+typedef struct objects
 {
 	uint8_t posY;
 	uint8_t posX;
 	uint8_t type;   //type 1 = car, type 2 = truck
 	uint8_t rgb[2];
 	
-};
+} objects;
 
 
 #endif /* INCFILE1_H_ */
