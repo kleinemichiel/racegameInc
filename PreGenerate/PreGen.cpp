@@ -7,11 +7,11 @@
 #include "PreGen.h"
 
 objects object[512];
-uint8_t counter =1;
+
 
 
 extern void preGeninit(MY_USART serial){
-	
+	uint8_t counter =1;
 	for(uint16_t i=0; i<512; i++){
 		if(counter == 4){
 			counter =1;
