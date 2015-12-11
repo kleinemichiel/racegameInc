@@ -219,6 +219,7 @@
 extern void showGame(MI0283QT9 lcd, MY_USART serial){
 	
 	uint8_t x = 2;
+	uint8_t movCounter = 0;
 	uint8_t colored[] = {255,255,255};
 		
 	//Draw game road
@@ -232,25 +233,49 @@ extern void showGame(MI0283QT9 lcd, MY_USART serial){
 	while(1){
 		//shows the enemy cars
 		showGenObjects(lcd, serial);	
-		
+		//Draw player car at start location
+		drawCar(lcd, serial, x, 12,colored);
 		
 		//draws car at x depending on tilt, and y = 12 (front of car), y = 15 end of car
 		if(nun.retreive_data()){
-			drawCar(lcd, serial, x, 12,colored);
-			if(nun.getAccX() > 130){	
-				removeCar(lcd, serial, x, 12);
-				if(x<4){
-					x++;
+			//if nunchuck is tilted right, increment x
+			if(nun.getAccX() > 148){	
+				if(movCounter == 0){
+					removeCar(lcd, serial, x, 12);
+					if(x<4){
+						x++;
+					}
+					movCounter++;	
+				}else{
+					movCounter++;
+					if(movCounter>=5){
+						movCounter = 0;
+					}
 				}
-				drawCar(lcd, serial, x, 12, colored);
-			} else if(nun.getAccX() > 80 && nun.getAccX() < 110){
-				removeCar(lcd, serial, x, 12);
-				if(x>0){
-					x--;
+			drawCar(lcd, serial, x, 12, colored);
+			}
+			//draw car at x location
+			//if nunchuck is tilted left, substract 1 from x
+			else if(nun.getAccX() > 70 && nun.getAccX() < 108){
+				if(movCounter==0){
+					removeCar(lcd, serial, x, 12);
+					if(x>0){
+						x--;
+					}
+					movCounter++;					
+				}else{
+					movCounter++;
+					if(movCounter>=5){
+						movCounter = 0;
+					}
 				}
-				drawCar(lcd, serial, x, 12, colored);
-			} 
-			serial.sendInt(nun.getAccX());
+			//draw car at x location
+			drawCar(lcd, serial, x, 12, colored);
+			}
+			else if(nun.getAccX() > 120 && nun.getAccX() < 136){
+			movCounter = 0;
+			}
 		} 
-	}
+		serial.sendInt(nun.getAccX());
+	} 
 }
