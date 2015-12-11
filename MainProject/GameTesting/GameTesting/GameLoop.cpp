@@ -236,7 +236,7 @@ extern void showGame(MI0283QT9 lcd, MY_USART serial){
 		
 		//draws car at x depending on tilt, and y = 12 (front of car), y = 15 end of car
 		if(nun.retreive_data()){
-			drawCar(lcd, serial, xTest, 12,colored);
+			drawCar(lcd, serial, x, 12,colored);
 			if(nun.getAccX() > 130){	
 				removeCar(lcd, serial, x, 12);
 				if(x<4){
