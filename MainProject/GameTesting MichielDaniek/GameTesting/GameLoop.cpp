@@ -227,6 +227,24 @@ extern void showGame(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 	showDefaultLayout(lcd, serial);
 	
 	nun.nunchuck_init();
+	object[2];
+
+
+	posYobj1 = 0;
+	posYobj2 = 0;
+	posYobj3 = 0;
+
+	prevposYobj1 = 0;
+	prevposYobj2 = 0;
+	prevposYobj3 = 0;
+
+	prevposXobj1 = 0;
+	prevposXobj2 = 0;
+	prevposXobj3 = 0;
+
+	keepObj1Alive = 0;
+	keepObj2Alive = 0;
+	keepObj3Alive = 0;
 	
 	//start game loop
 	while(1){
@@ -235,77 +253,26 @@ extern void showGame(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 		//Draw player car at start location
 		drawCar(lcd, serial, x, 12,colored);
 
-		if(posYobj1>=12){
+		if(posYobj1 >= 12 && posYobj1<17){
 			if (object[0].posX == x ) {
-				objects object[2];
-
-
-				uint8_t posYobj1 = 0;
-				uint8_t posYobj2 = 0;
-				uint8_t posYobj3 = 0;
-
-				uint8_t prevposYobj1 = 0;
-				uint8_t prevposYobj2 = 0;
-				uint8_t prevposYobj3 = 0;
-
-				uint8_t prevposXobj1 = 0;
-				uint8_t prevposXobj2 = 0;
-				uint8_t prevposXobj3 = 0;
-
-				uint8_t keepObj1Alive = 0;
-				uint8_t keepObj2Alive = 0;
-				uint8_t keepObj3Alive = 0;
+				
 				showPauseMenu(lcd, obj, serial);
 
 			}
 
 		
 		}
-		if (posYobj2 >= 12) {
+		if (posYobj2 >= 12&& posYobj2<17) {
 			if (object[1].posX == x) {
-				objects object[2];
-
-
-				uint8_t posYobj1 = 0;
-				uint8_t posYobj2 = 0;
-				uint8_t posYobj3 = 0;
-
-				uint8_t prevposYobj1 = 0;
-				uint8_t prevposYobj2 = 0;
-				uint8_t prevposYobj3 = 0;
-
-				uint8_t prevposXobj1 = 0;
-				uint8_t prevposXobj2 = 0;
-				uint8_t prevposXobj3 = 0;
-
-				uint8_t keepObj1Alive = 0;
-				uint8_t keepObj2Alive = 0;
-				uint8_t keepObj3Alive = 0;
+				 
 				showPauseMenu(lcd, obj, serial);
 			}
 
 
 		}
-		if (posYobj3 >= 12) {
+		if (posYobj3 >= 12 && posYobj3<17) {
 			if (object[2].posX == x) {
-				objects object[2];
-
-
-				uint8_t posYobj1 = 0;
-				uint8_t posYobj2 = 0;
-				uint8_t posYobj3 = 0;
-
-				uint8_t prevposYobj1 = 0;
-				uint8_t prevposYobj2 = 0;
-				uint8_t prevposYobj3 = 0;
-
-				uint8_t prevposXobj1 = 0;
-				uint8_t prevposXobj2 = 0;
-				uint8_t prevposXobj3 = 0;
-
-				uint8_t keepObj1Alive = 0;
-				uint8_t keepObj2Alive = 0;
-				uint8_t keepObj3Alive = 0;
+				 
 				showPauseMenu(lcd, obj, serial);
 			}
 
