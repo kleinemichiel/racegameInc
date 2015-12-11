@@ -89,9 +89,10 @@ int main(){
 	//sets background to red
 	lcd.fillScreen(BACKGROUND);
 	
+
+	
 	while(1){
-		//showMainMenu(lcd, obj, serial);
-		showGame(lcd,obj,serial);
+		showMainMenu(lcd, obj, serial);
 		
 		/*uint8_t color[] = {255,255,255};
 		drawCar(lcd, serial, 2, 10, color);*/
