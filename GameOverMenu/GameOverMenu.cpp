@@ -21,14 +21,16 @@ void showNoHighScore(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 		if(obj.drawButton(lcd, "Restart", 20, 75, 200, 40))
 		{
 			lcd.fillScreen(BACKGROUND);
-			showGame(lcd, obj ,serial);
+			restartGame = 1;
+			break;
 		}
 		
 		//button for opening sub menu generator
 		if(obj.drawButton(lcd, "Main Menu", 20, 135, 200, 40))
 		{
 			lcd.fillScreen(BACKGROUND);
-			showMainMenu(lcd, obj, serial);
+			returnToMain = 1;
+			break;
 		}
 	}
 	
@@ -65,6 +67,18 @@ void showGameOverMenu(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial, uint16_t 
 	}
 
 	while(1){
+		
+		
+		if(restartGame){
+			restartGame = 1;
+			break;
+		}
+		
+		if(returnToMain){
+			returnToMain = 1;
+			break;
+		}
+		
 		if(EEPROM.read(173) >= score){
 			lcd.fillScreen(BACKGROUND);
 			showNoHighScore(lcd,obj,serial);
