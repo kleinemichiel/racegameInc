@@ -39,6 +39,27 @@ uint8_t MENUOBJECTS::drawButton(MI0283QT9 lcd, char text[], uint16_t x, uint16_t
 	return buttonPressed;
 }
 
+uint8_t MENUOBJECTS::drawSlider(MI0283QT9 lcd, uint16_t y, uint8_t sValue){
+	
+	uint8_t sliderValue = sValue;
+	uint8_t prevSliderValue = 0;
+	
+	lcd.drawRect(20,y,200,10, OBJECTCOLOR);
+	lcd.fillRect((sliderValue*0.785)+10, y-5, 20,20, OBJECTCOLOR);
+	
+	lcd.touchRead();
+	if(lcd.touchZ() && lcd.touchX() >= 20 && lcd.touchX() <= 200 && lcd.touchY() >= y-5 && lcd.touchY() <= (y + 15))
+	{
+		prevSliderValue = sliderValue;
+		sliderValue = (lcd.touchX()*1.0625);
+		lcd.fillRect((prevSliderValue*0.785)+10, y-5, 20,20, BACKGROUND);
+		lcd.drawRect(20,y,200,10, OBJECTCOLOR);
+		lcd.fillRect((sliderValue*0.785)+10, y-5, 20,20, OBJECTCOLOR);
+	}
+	
+	return sliderValue;
+}
+
 //creates checkboxes which need a pointer to a int used as a bool, it changes it instead of returning
 void MENUOBJECTS::drawCheckbox(MI0283QT9 lcd, uint16_t x, uint16_t y, uint16_t s, uint8_t *setValue)
 {
@@ -66,8 +87,27 @@ void MENUOBJECTS::drawCheckbox(MI0283QT9 lcd, uint16_t x, uint16_t y, uint16_t s
 	{	
 		lcd.drawRect(x, y,s,s, OBJECTCOLOR);
 	}
-	
-	
-	
 }
 
+
+	
+
+	
+
+char buttonChar[] = "A";
+
+char MENUOBJECTS::drawCharSelector(MI0283QT9 lcd, uint16_t x, uint16_t y, char previous){
+	
+	buttonChar[0] = previous;
+	
+	if(buttonChar[0] == '['){
+		buttonChar[0] = 'A';
+	}
+	
+	if(drawButton(lcd, buttonChar, x, y, 50, 50)){
+		buttonChar[0]++;
+		drawButton(lcd, buttonChar, x, y, 50, 50);
+	}
+	
+	return buttonChar[0];
+}
