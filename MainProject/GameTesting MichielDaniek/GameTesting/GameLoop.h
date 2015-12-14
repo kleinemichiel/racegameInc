@@ -12,6 +12,7 @@
 #include "SettingsMenu.h"
 #include "MainMenuSP.h"
 #include "PauseMenu.h"
+#include "GameOverMenu.h"
 
 extern void showGame(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial);
 

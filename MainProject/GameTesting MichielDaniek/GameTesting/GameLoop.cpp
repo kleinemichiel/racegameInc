@@ -223,6 +223,9 @@ extern void showGame(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 	uint8_t movCounter = 0;
 	uint8_t colored[] = {255,255,255};
 	uint16_t score = 0;
+	uint16_t prevScore1 = 0;
+	uint16_t prevScore2 = 0;
+	uint16_t prevScore3 = 0;
 		
 	//Draw game road
 	showDefaultLayout(lcd, serial);
@@ -249,51 +252,86 @@ extern void showGame(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 	
 	//start game loop
 	while(1){
+		
 		//shows the enemy cars
 		showGenObjects(lcd, serial);	
+		
 		//Draw player car at start location
 		drawCar(lcd, serial, x, 12,colored);
+		
 		//If obj1 is at you y location, check if objectx = playerx
 		if((object[0].type == 1 && posYobj1 >= 12 && posYobj1<17) || (object[0].type == 2 && posYobj1>= 12 && posYobj1<23)){
 			if (object[0].posX == x ) {
-				showPauseMenu(lcd, obj, serial);
+				showGameOverMenu(lcd, obj, serial,score);
 			}else{
 				if (object[0].type == 1){
-					score++;
+					if (prevScore1 == 0)
+					{
+						score++;
+						prevScore1++;
+					}
 				}else if(object[0].type == 2){
-					score = score + 2;	
+					if (prevScore1 == 0)
+					{
+						score = score + 2;
+						prevScore1++;
+					}
 				}
 			}
 		}
+		
 		//If obj2 is at player y location, check if objectx = playerx
 		if((object[1].type == 1 && posYobj2 >= 12 && posYobj2<17) || (object[1].type == 2 && posYobj2>= 12 && posYobj2<23)){
 			if (object[1].posX == x) {
-				 
-				showPauseMenu(lcd, obj, serial);
+				showGameOverMenu(lcd, obj, serial,score);
 			}else{
-			if (object[1].type == 1){
-					score++;
-				}else if(object[0].type == 2){
-					score = score + 2;
+				if (object[0].type == 1){
+					if (prevScore2 == 0)
+					{
+						score++;
+						prevScore2++;
+					}
+			    }else if(object[0].type == 2){
+					if (prevScore2 == 0)
+					{
+						score = score + 2;
+						prevScore2++;
+					}
+				}
 			}
 		}
-	}
+		
 	//If obj3 is at player y location, check if objectx = playerx
 		if((object[2].type == 1 && posYobj3 >= 12 && posYobj3<17) || (object[2].type == 2 && posYobj3>= 12 && posYobj3<23)){
 			if (object[2].posX == x) {
-				showPauseMenu(lcd, obj, serial);
+				showGameOverMenu(lcd, obj, serial,score);
 			}else{
-			if (object[2].type == 1){
-					score++;
+				if (object[0].type == 1){
+					if (prevScore3 == 0)
+					{
+						score++;
+						prevScore3++;
+					}
 				}else if(object[0].type == 2){
-					score = score + 2;
-				}
-			}	
-
-
+					if (prevScore3 == 0)
+					{
+						score = score + 2;
+						prevScore3++;
+					}
+				}	
+			}
 		}
-
 		
+		if (posYobj1 == 1)
+		{
+			prevScore1 = 0;
+		}else if (posYobj2 == 1)
+		{
+			prevScore2 = 0;
+		}else if (posYobj3 == 1)
+		{
+			prevScore3 = 0;
+		}
 		
 		//draws car at x depending on tilt, and y = 12 (front of car), y = 15 end of car
 		if(nun.retreive_data()){
@@ -337,6 +375,8 @@ extern void showGame(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 			}else if(nun.getAccX() > 120 && nun.getAccX() < 136){
 			movCounter = 0;
 			}
+			
+			lcd.drawInteger(22, 2, score, DEC, GRASSCOLOR, BACKGROUND, 1);
 			
 		}
 	} 
