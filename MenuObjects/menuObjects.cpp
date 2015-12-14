@@ -66,8 +66,27 @@ void MENUOBJECTS::drawCheckbox(MI0283QT9 lcd, uint16_t x, uint16_t y, uint16_t s
 	{	
 		lcd.drawRect(x, y,s,s, OBJECTCOLOR);
 	}
-	
-	
-	
 }
 
+
+	
+
+	
+
+char buttonChar[] = "A";
+
+char MENUOBJECTS::drawCharSelector(MI0283QT9 lcd, uint16_t x, uint16_t y, char previous){
+	
+	buttonChar[0] = previous;
+	
+	if(buttonChar[0] == '['){
+		buttonChar[0] = 'A';
+	}
+	
+	if(drawButton(lcd, buttonChar, x, y, 50, 50)){
+		buttonChar[0]++;
+		drawButton(lcd, buttonChar, x, y, 50, 50);
+	}
+	
+	return buttonChar[0];
+}
