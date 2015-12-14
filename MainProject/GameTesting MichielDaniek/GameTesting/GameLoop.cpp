@@ -222,6 +222,7 @@ extern void showGame(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 	uint8_t x = 2;
 	uint8_t movCounter = 0;
 	uint8_t colored[] = {255,255,255};
+	uint16_t score = 0;
 		
 	//Draw game road
 	showDefaultLayout(lcd, serial);
@@ -252,29 +253,42 @@ extern void showGame(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 		showGenObjects(lcd, serial);	
 		//Draw player car at start location
 		drawCar(lcd, serial, x, 12,colored);
-
-		if(posYobj1 >= 12 && posYobj1<17){
+		//If obj1 is at you y location, check if objectx = playerx
+		if((object[0].type == 1 && posYobj1 >= 12 && posYobj1<17) || (object[0].type == 2 && posYobj1>= 12 && posYobj1<23)){
 			if (object[0].posX == x ) {
-				
 				showPauseMenu(lcd, obj, serial);
-
+			}else{
+				if (object[0].type == 1){
+					score++;
+				}else if(object[0].type == 2){
+					score = score + 2;	
+				}
 			}
-
-		
 		}
-		if (posYobj2 >= 12&& posYobj2<17) {
+		//If obj2 is at player y location, check if objectx = playerx
+		if((object[1].type == 1 && posYobj2 >= 12 && posYobj2<17) || (object[1].type == 2 && posYobj2>= 12 && posYobj2<23)){
 			if (object[1].posX == x) {
 				 
 				showPauseMenu(lcd, obj, serial);
+			}else{
+			if (object[1].type == 1){
+					score++;
+				}else if(object[0].type == 2){
+					score = score + 2;
 			}
-
-
 		}
-		if (posYobj3 >= 12 && posYobj3<17) {
+	}
+	//If obj3 is at player y location, check if objectx = playerx
+		if((object[2].type == 1 && posYobj3 >= 12 && posYobj3<17) || (object[2].type == 2 && posYobj3>= 12 && posYobj3<23)){
 			if (object[2].posX == x) {
-				 
 				showPauseMenu(lcd, obj, serial);
-			}
+			}else{
+			if (object[2].type == 1){
+					score++;
+				}else if(object[0].type == 2){
+					score = score + 2;
+				}
+			}	
 
 
 		}
@@ -319,12 +333,11 @@ extern void showGame(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 				}
 			//draw car at x location
 			drawCar(lcd, serial, x, 12, colored);
-			}
-			else if(nun.getAccX() > 120 && nun.getAccX() < 136){
+			//if nunchuck is in middle, movCounter = 0
+			}else if(nun.getAccX() > 120 && nun.getAccX() < 136){
 			movCounter = 0;
 			}
 			
-		} 
-		serial.sendInt(nun.getC());
+		}
 	} 
 }
