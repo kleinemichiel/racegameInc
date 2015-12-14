@@ -12,6 +12,7 @@
 #include "MI0283QT9.h"
 #include "USART.h"
 #include "menuObjects.h"
+#include <EEPROM.h>
 
 extern void showHighscoreMenu(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial);
 
