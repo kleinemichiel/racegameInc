@@ -20,6 +20,7 @@ class MENUOBJECTS
 
 	public:
 	uint8_t drawButton(MI0283QT9 lcd, char text[], uint16_t x, uint16_t y, uint16_t w, uint16_t h);
+	uint8_t drawSlider(MI0283QT9 lcd ,uint16_t y, uint8_t sValue);
 	void drawCheckbox(MI0283QT9 lcd, uint16_t x, uint16_t y, uint16_t s, uint8_t *setValue);	
 	char drawCharSelector(MI0283QT9 lcd, uint16_t x, uint16_t y, char previous);
 };
