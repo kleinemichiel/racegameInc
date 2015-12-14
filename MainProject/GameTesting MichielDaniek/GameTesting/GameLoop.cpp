@@ -226,6 +226,17 @@ extern void showGame(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 	uint16_t prevScore1 = 0;
 	uint16_t prevScore2 = 0;
 	uint16_t prevScore3 = 0;
+	uint8_t pSensitivity = 0;
+	
+	if (sLow == 1)
+	{
+		pSensitivity = 5;
+	} else if (sMedium == 1)
+	{
+		pSensitivity = 4;
+	} else if (sHigh == 1){
+		pSensitivity = 3;	
+	}
 		
 	//Draw game road
 	showDefaultLayout(lcd, serial);
@@ -348,7 +359,7 @@ extern void showGame(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 					movCounter++;	
 				}else{
 					movCounter++;
-					if(movCounter>=5){
+					if(movCounter>=pSensitivity){
 						movCounter = 0;
 					}
 				}
@@ -365,7 +376,7 @@ extern void showGame(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 					movCounter++;					
 				}else{
 					movCounter++;
-					if(movCounter>=5){
+					if(movCounter>=pSensitivity){
 						movCounter = 0;
 					}
 				}

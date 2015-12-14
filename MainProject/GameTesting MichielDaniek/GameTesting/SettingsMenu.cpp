@@ -15,6 +15,115 @@ extern uint8_t easy = 1;
 extern uint8_t medium = 0;
 extern uint8_t hard = 0;
 
+extern uint8_t sLow = 1;
+extern uint8_t sMedium = 0;
+extern uint8_t sHigh = 0;
+
+void showSensitivity(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
+	
+	uint8_t sUp = 0;
+	uint8_t sDown = 0;
+	uint8_t sStart = 0;
+	
+	while(1){
+		lcd.drawText(0, 15, "Sensitivity", OBJECTCOLOR, BACKGROUND, 3);
+	
+		//drawing checkboxes and text on screen
+		
+		lcd.drawText(15, 80 , "LOW  :", OBJECTCOLOR, BACKGROUND, 2);
+		obj.drawCheckbox(lcd, 177, (87 - 24), 48, &sLow);
+		
+		lcd.drawText(15, 150, "MEDIUM:", OBJECTCOLOR, BACKGROUND, 2);
+		obj.drawCheckbox(lcd, 177, (157 - 24), 48, &sMedium);
+		
+		lcd.drawText(15, 220, "HIGH  :", OBJECTCOLOR, BACKGROUND, 2);
+		obj.drawCheckbox(lcd, 177, (227 - 24), 48, &sHigh);
+		
+		//logics for only 1 checked per click
+		if(sLow && !sStart)
+		{
+			sStart = 1;
+			sUp = 1;
+		}
+		else if(sMedium && !sStart)
+		{
+			sStart = 1;
+			sUp = 0;
+			sDown = 0;
+		}
+		else if(sHigh && !sStart)
+		{
+			sStart = 1;
+			sDown = 1;
+		}
+		
+		
+		if(sLow && sUp){
+			//serial.sendString("easy\n");
+			if(sMedium){
+				sLow = 0;
+				sUp = 0;
+				sDown = 0;
+			}
+			
+			if(sHigh){
+				sLow = 0;
+				sUp = 0;
+				sDown = 1;
+			}
+		}
+		
+		if(sMedium && !sUp && !sDown){
+			//serial.sendString("medium\n");
+			if(sLow){
+				sMedium = 0;
+				sUp = 1;
+				sDown = 0;
+			}
+			
+			if(sHigh){
+				sMedium = 0;
+				sUp = 0;
+				sDown = 1;
+			}
+		}
+		
+		if(sHigh && sDown){
+			//serial.sendString("hard\n");
+			if(sMedium){
+				sHigh = 0;
+				sUp = 0;
+				sDown = 0;
+			}
+			
+			if(sLow){
+				sHigh = 0;
+				sUp = 1;
+				sDown = 0;
+			}
+		}
+	
+		if(obj.drawButton(lcd, "Back", 20, 270, 200, 40)){
+			lcd.fillScreen(BACKGROUND);
+			break;
+		}
+	}
+}
+
+void showPlayerColor(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
+	
+	
+	
+	while(1){
+		lcd.drawText(0, 15, "Player color", OBJECTCOLOR, BACKGROUND, 3);
+	
+		if(obj.drawButton(lcd, "Back", 20, 270, 200, 40)){
+			lcd.fillScreen(BACKGROUND);
+			break;
+		}
+	}
+}
+
 
 
 //sub menu which contains checkboxes for setting difficulty (easy, medium, hard) including logics to allow only one button to be set
@@ -114,6 +223,36 @@ void showDifficulty(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 	}
 }
 
+
+void ShowPlayerSettings(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
+	while(1){
+		lcd.drawText(0, 15, "Player", OBJECTCOLOR, BACKGROUND, 3);
+		
+		if(obj.drawButton(lcd, "Difficulty", 20, 75, 200, 40))
+		{
+			lcd.fillScreen(BACKGROUND);
+			showDifficulty(lcd, obj, serial);
+		}
+		
+		if(obj.drawButton(lcd, "Color", 20, 135, 200, 40))
+		{
+			lcd.fillScreen(BACKGROUND);
+			showPlayerColor(lcd, obj, serial);
+		}
+		
+		if(obj.drawButton(lcd, "Sensitivity", 20, 195, 200, 40))
+		{
+			lcd.fillScreen(BACKGROUND);
+			showSensitivity(lcd, obj, serial);
+		}
+		if(obj.drawButton(lcd, "Back", 20, 270, 200, 40)){
+			lcd.fillScreen(BACKGROUND);
+			break;
+		}
+		
+	}
+}
+
 //sub menu which contains checkboxes for setting generator options (realtime, pretime) including logics to allow only one button to be set
 void showGenerator(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 	
@@ -188,10 +327,10 @@ extern void showSettingMenu(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 		lcd.drawText(x, 15, title, OBJECTCOLOR, BACKGROUND, 3);
 		
 		//button for opening sub menu difficulty
-		if(obj.drawButton(lcd, "Difficulty", 20, 75, 200, 40))
+		if(obj.drawButton(lcd, "Player", 20, 75, 200, 40))
 		{
 			lcd.fillScreen(BACKGROUND);
-			showDifficulty(lcd, obj, serial);
+			ShowPlayerSettings(lcd, obj, serial);
 		}
 		
 		//button for opening sub menu generator
