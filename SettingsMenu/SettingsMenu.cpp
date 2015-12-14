@@ -363,7 +363,22 @@ extern void showSettingMenu(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 		}
 		
 		//button for resetting score
-		obj.drawButton(lcd, "Reset Score", 20, 195, 200, 40);
+		if(obj.drawButton(lcd, "Reset Score", 20, 195, 200, 40)){
+			EEPROM.write(171, 0);
+			EEPROM.write(174, 'A');
+			EEPROM.write(175, 'A');
+			EEPROM.write(176, 'A');
+			
+			EEPROM.write(172, 0);
+			EEPROM.write(177, 'A');
+			EEPROM.write(178, 'A');
+			EEPROM.write(179, 'A');
+			
+			EEPROM.write(173, 0);
+			EEPROM.write(180, 'A');
+			EEPROM.write(181, 'A');
+			EEPROM.write(182, 'A');
+		}
 		
 		//button to return to main menu
 		if(obj.drawButton(lcd, "Back", 20, 270, 200, 40)){

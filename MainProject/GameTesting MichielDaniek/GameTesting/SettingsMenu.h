@@ -14,6 +14,7 @@
 #include "menuObjects.h"
 #include "GameObjects.h"
 #include "GridLayout.h"
+#include <EEPROM.h>
 
 //global values accessable by any other libary included below this library
 extern uint8_t realTime;
