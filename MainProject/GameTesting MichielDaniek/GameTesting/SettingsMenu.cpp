@@ -19,6 +19,10 @@ extern uint8_t sLow = 1;
 extern uint8_t sMedium = 0;
 extern uint8_t sHigh = 0;
 
+extern uint8_t red = 255;
+extern uint8_t blue = 255;
+extern uint8_t green = 255;
+
 void showSensitivity(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 	
 	uint8_t sUp = 0;
@@ -112,12 +116,30 @@ void showSensitivity(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 
 void showPlayerColor(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 	
-	
-	
 	while(1){
-		lcd.drawText(0, 15, "Player color", OBJECTCOLOR, BACKGROUND, 3);
 	
-		if(obj.drawButton(lcd, "Back", 20, 270, 200, 40)){
+		lcd.drawText(0, 15, "Color", OBJECTCOLOR, BACKGROUND, 3);
+
+		red = obj.drawSlider(lcd, 60, red);
+
+		green = obj.drawSlider(lcd, 100, green);
+		
+		blue = obj.drawSlider(lcd, 140, blue);
+		
+		//draw a car
+		lcd.drawRect(100, 180, 40, 64, RGB(red,green,blue));
+		lcd.drawLine(100+1,180+16,100+10, 180+26, RGB(red,green,blue));
+		lcd.drawLine(100+39,180+16,100+30, 180+26, RGB(red,green,blue));
+		lcd.drawLine(100+10,180+26,100+30, 180+26, RGB(red,green,blue));
+		lcd.drawLine(100+10,180+38,100+30, 180+38, RGB(red,green,blue));
+		lcd.drawLine(100+1,180+48,100+10, 180+38, RGB(red,green,blue));
+		lcd.drawLine(100+39,180+48,100+30, 180+38, RGB(red,green,blue));
+		lcd.drawLine(100+10,180+26,100+10, 180+38, RGB(red,green,blue));
+		lcd.drawLine(100+30,180+26,100+30, 180+38, RGB(red,green,blue));
+		lcd.drawLine(100,180+16,100+38, 180+16, RGB(red,green,blue));
+		lcd.drawLine(100,180+48,100+38, 180+48, RGB(red,green,blue));
+	
+		if(obj.drawButton(lcd, "Accept", 20, 270, 200, 40)){
 			lcd.fillScreen(BACKGROUND);
 			break;
 		}

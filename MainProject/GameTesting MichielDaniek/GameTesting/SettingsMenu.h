@@ -12,6 +12,8 @@
 #include "MI0283QT9.h"
 #include "USART.h"
 #include "menuObjects.h"
+#include "GameObjects.h"
+#include "GridLayout.h"
 
 //global values accessable by any other libary included below this library
 extern uint8_t realTime;
@@ -24,6 +26,10 @@ extern uint8_t hard;
 extern uint8_t sLow;
 extern uint8_t sMedium;
 extern uint8_t sHigh;
+
+extern uint8_t red;
+extern uint8_t green;
+extern uint8_t blue;
 
 //makes it possible to use this function without defining a class, so you dont have to define a type for the class in the main program, easier and less messy
 extern void showSettingMenu(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial);
