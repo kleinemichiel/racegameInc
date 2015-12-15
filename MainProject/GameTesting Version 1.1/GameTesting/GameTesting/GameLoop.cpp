@@ -482,7 +482,7 @@ extern void showGame(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 		}
 		
 		//If obj2 is at player y location, check if objectx = playerx
-		if((object[1].type == 1 && posYobj2 >= 12 && posYobj2<17) || (object[1].type == 2 && posYobj2>= 12 && posYobj2<23)){
+		if((object[1].type == 1 && posYobj2 >= 12 && posYobj2<17) || (object[1].type == 2 && posYobj2>= 12 && posYobj2<22)){
 			if (object[1].posX == x) {
 				showGameOverMenu(lcd, obj, serial,score);
 				}else{
@@ -503,7 +503,7 @@ extern void showGame(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 		}
 		
 		//If obj3 is at player y location, check if objectx = playerx
-		if((object[2].type == 1 && posYobj3 >= 12 && posYobj3<17) || (object[2].type == 2 && posYobj3>= 12 && posYobj3<23)){
+		if((object[2].type == 1 && posYobj3 >= 12 && posYobj3<17) || (object[2].type == 2 && posYobj3>= 12 && posYobj3<22)){
 			if (object[2].posX == x) {
 				showGameOverMenu(lcd, obj, serial,score);
 				}else{
