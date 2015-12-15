@@ -120,11 +120,11 @@ void showPlayerColor(MI0283QT9 lcd, MENUOBJECTS obj, MY_USART serial){
 	
 		lcd.drawText(0, 15, "Color", OBJECTCOLOR, BACKGROUND, 3);
 
-		red = obj.drawSlider(lcd, 60, red);
+		red = obj.drawSlider(lcd, 60, red, red, 0,0);
 
-		green = obj.drawSlider(lcd, 100, green);
+		green = obj.drawSlider(lcd, 100, green , 0 , green, 0);
 		
-		blue = obj.drawSlider(lcd, 140, blue);
+		blue = obj.drawSlider(lcd, 140, blue, 0, 0 , blue);
 		
 		//draw a car
 		lcd.drawRect(100, 180, 40, 64, RGB(red,green,blue));
