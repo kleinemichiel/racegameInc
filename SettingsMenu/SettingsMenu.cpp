@@ -110,11 +110,11 @@ void showSensitivity(MI0283QT9 lcd){
 				sDown = 0;
 			}
 		}
-		if(drawButton(lcd,"H", 20,270, 95, 40)){
+		if(drawButton(lcd,"H", 20,270, 85, 40)){
 			returnToMain = 1;
 		}
 	
-		if(drawButton(lcd, "B", 105, 270, 95, 40)){
+		if(drawButton(lcd, "B", 105, 270, 85, 40)){
 			lcd.fillScreen(BACKGROUND);
 			break;
 		}
@@ -180,11 +180,11 @@ void showController(MI0283QT9 lcd){
 				showSensitivity(lcd);
 			}
 			
-			if(drawButton(lcd,"H", 20,270, 95, 40)){
+			if(drawButton(lcd,"H", 20,270, 85, 40)){
 				returnToMain = 1;
 			}
 			
-			if(drawButton(lcd, "B", 105, 270, 95, 40)){
+			if(drawButton(lcd, "B", 105, 270, 85, 40)){
 				lcd.fillScreen(BACKGROUND);
 				break;
 			}
@@ -314,11 +314,11 @@ void showDifficulty(MI0283QT9 lcd){
 		}
 		
 		
-		if(drawButton(lcd,"H", 20,270, 95, 40)){
+		if(drawButton(lcd,"H", 20,270, 85, 40)){
 			returnToMain = 1;
 		}
 		
-		if(drawButton(lcd, "B", 105, 270, 95, 40)){
+		if(drawButton(lcd, "B", 105, 270, 85, 40)){
 			lcd.fillScreen(BACKGROUND);
 			break;
 		}
@@ -351,11 +351,11 @@ void ShowPlayerSettings(MI0283QT9 lcd){
 			lcd.fillScreen(BACKGROUND);
 			showController(lcd);
 		}
-		if(drawButton(lcd,"H", 20,270, 95, 40)){
+		if(drawButton(lcd,"H", 20,270, 85, 40)){
 			returnToMain = 1;
 		}
 		
-		if(drawButton(lcd, "B", 105, 270, 95, 40)){
+		if(drawButton(lcd, "B", 105, 270, 85, 40)){
 			lcd.fillScreen(BACKGROUND);
 			break;
 		}
@@ -417,11 +417,11 @@ void showGenerator(MI0283QT9 lcd){
 		
 		
 		
-		if(drawButton(lcd,"H", 20,270, 95, 40)){
+		if(drawButton(lcd,"H", 20,270, 85, 40)){
 			returnToMain = 1;
 		}
 		
-		if(drawButton(lcd, "B", 105, 270, 95, 40)){
+		if(drawButton(lcd, "B", 105, 270, 85, 40)){
 			lcd.fillScreen(BACKGROUND);
 			break;
 		}
