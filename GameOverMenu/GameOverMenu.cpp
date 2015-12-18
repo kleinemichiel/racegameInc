@@ -9,15 +9,34 @@
 
 
 
-void showNoHighScore(MI0283QT9 lcd){
+void showNoHighScore(MI0283QT9 lcd, uint16_t score,  uint8_t isHighscore){
 	while(1){
+		
 		char title[] = "You DIED!";
 		uint8_t lengthOfString = (strlen(title) * 26);
 		uint8_t x = (240 - lengthOfString);
 		
 		lcd.drawText(x, 15, title, OBJECTCOLOR, BACKGROUND, 3);
+		if(!isHighscore){
+			
+			
+			
+			lcd.drawText(15, 60, "Your Score:", OBJECTCOLOR, BACKGROUND, 2);
+			if(setT){
+				lcd.drawText(15, 80, "Tilt Bonus (x2):", OBJECTCOLOR, BACKGROUND, 1);
+			}
+			lcd.drawInteger(70, 100, score, DEC, OBJECTCOLOR, BACKGROUND, 3);
+			
+			
+			lcd.drawText(15, 140, "You Need:", OBJECTCOLOR, BACKGROUND, 2);
+			
+			lcd.drawInteger(70, 170, EEPROM.read(173), DEC, OBJECTCOLOR, BACKGROUND, 3);
+		} 
 		
-		if(drawButton(lcd, "Restart", 20, 75, 200, 40))
+		
+		
+		
+		if(drawButton(lcd, "Restart", 20, 220, 200, 40))
 		{
 			lcd.fillScreen(BACKGROUND);
 			restartGame = 1;
@@ -25,7 +44,7 @@ void showNoHighScore(MI0283QT9 lcd){
 		}
 		
 		//button for opening sub menu generator
-		if(drawButton(lcd, "Main Menu", 20, 135, 200, 40))
+		if(drawButton(lcd, "Main Menu", 20, 270, 200, 40))
 		{
 			lcd.fillScreen(BACKGROUND);
 			returnToMain = 1;
@@ -64,7 +83,12 @@ void showGameOverMenu(MI0283QT9 lcd, uint16_t score){
 		EEPROM.write(181, 'A');
 		EEPROM.write(182, 'A');
 	}
-
+	
+	
+	if(setT){
+		score = score * 2;
+	}
+	
 	while(1){
 		
 		
@@ -80,16 +104,20 @@ void showGameOverMenu(MI0283QT9 lcd, uint16_t score){
 		
 		if(EEPROM.read(173) >= score){
 			lcd.fillScreen(BACKGROUND);
-			showNoHighScore(lcd);
+			showNoHighScore(lcd, score, 0);
 		}else if(EEPROM.read(173) < score) {
 			
-			char title[] = "Highscore";
+			char title[] = "You DIED!";
 			uint8_t lengthOfString = (strlen(title) * 26);
-			uint8_t x = (240 - lengthOfString);
+			uint8_t x = (245 - lengthOfString);
 			
 			lcd.drawText(x, 15, title, OBJECTCOLOR, BACKGROUND, 3);
 			
+			lcd.drawText(15, 40, "Highscore!!!", OBJECTCOLOR, BACKGROUND, 2);
 			
+			if(setT){
+				lcd.drawText(15, 60, "Tilt Bonus (x2):", OBJECTCOLOR, BACKGROUND, 1);
+			}
 			lcd.drawInteger(70, 80, score, DEC, OBJECTCOLOR, BACKGROUND, 3);
 			
 			
@@ -152,7 +180,7 @@ void showGameOverMenu(MI0283QT9 lcd, uint16_t score){
 					EEPROM.write(182, char3);
 				}
 				lcd.fillScreen(BACKGROUND);
-				showNoHighScore(lcd);
+				showNoHighScore(lcd, score, 1);
 			}
 
 			}

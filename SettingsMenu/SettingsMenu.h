@@ -27,6 +27,8 @@ extern uint8_t red;
 extern uint8_t green;
 extern uint8_t blue;
 
+extern uint8_t setY;
+extern uint8_t setT;
 //makes it possible to use this function without defining a class, so you dont have to define a type for the class in the main program, easier and less messy
 extern void showSettingMenu(MI0283QT9 lcd);
 

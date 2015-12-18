@@ -13,23 +13,7 @@
  objects object[2];
  objects preGenObjects[128];
 
- uint8_t posYobj1 = 0;
- uint8_t posYobj2 = 0;
- uint8_t posYobj3 = 0;
 
- uint8_t prevposYobj1 = 0;
- uint8_t prevposYobj2 = 0;
- uint8_t prevposYobj3 = 0;
-
- uint8_t prevposXobj1 = 0;
- uint8_t prevposXobj2 = 0;
- uint8_t prevposXobj3 = 0;
-
- uint8_t keepObj1Alive = 0;
- uint8_t keepObj2Alive = 0;
- uint8_t keepObj3Alive = 0;
-
- 
  //generates objects, parameter: position of object in array
  void genNewObjects(uint8_t objectReGen)
  {
@@ -149,7 +133,17 @@
  }
 
 
+ uint8_t posYobj1 = 0;
+ uint8_t posYobj2 = 0;
+ uint8_t posYobj3 = 0;
 
+ uint8_t prevposXobj1 = 0;
+ uint8_t prevposXobj2 = 0;
+ uint8_t prevposXobj3 = 0;
+
+ uint8_t keepObj2Alive = 0;
+ uint8_t keepObj3Alive = 0;
+ 
  uint8_t onBeginB = 0;
  uint8_t counter = 0;
  //shows the objects on screen - this loop is a example loop on how to print the objects!
@@ -245,26 +239,24 @@
 	 
 	 
 	 if(object[0].type == 1){
-		 removeCar(lcd, prevposXobj1, prevposYobj1);
+		 removeCar(lcd, prevposXobj1, object[0].posY);
 		 drawCar(lcd, object[0].posX, posYobj1, object[0].rgb);
-		 //drawCar(lcd, serial, object[0].posX, posYobj1, rgbcolor);
-		 object[0].posY = posYobj2;
+		 object[0].posY = posYobj1;
 		} else {
-		 removeTruck(lcd, prevposXobj1, prevposYobj1);
+		 removeTruck(lcd, prevposXobj1, object[0].posY);
 		 drawTruck(lcd, object[0].posX, posYobj1, object[0].rgb);
-		 object[0].posY = posYobj2;
+		 object[0].posY = posYobj1;
 	 }
 	 
 	 if(object[1].type == 1){
 		 if(posYobj2 < 128){
-			 removeCar(lcd, prevposXobj2, prevposYobj2);
+			 removeCar(lcd, prevposXobj2, object[1].posY);
 			 drawCar(lcd, object[1].posX, posYobj2, object[1].rgb);
-			 //drawCar(lcd, serial, object[1].posX, posYobj2, rgbcolor);
 			 object[1].posY = posYobj2;
 		 }
 		 } else {
 		 if(posYobj2 < 128){
-			 removeTruck(lcd, prevposXobj2, prevposYobj2);
+			 removeTruck(lcd, prevposXobj2, object[1].posY);
 			 drawTruck(lcd, object[1].posX, posYobj2, rgbcolor);
 			 object[1].posY = posYobj2;
 		 }
@@ -272,23 +264,18 @@
 	 
 	 if(object[2].type == 1){
 		 if(posYobj3 < 128){
-			 removeCar(lcd, prevposXobj3, prevposYobj3);
+			 removeCar(lcd, prevposXobj3, object[2].posY);
 			 drawCar(lcd, object[2].posX, posYobj3, object[2].rgb);
-			// drawCar(lcd, serial, object[2].posX, posYobj3, rgbcolor);
-			 object[2].posY = posYobj2;
+			 object[2].posY = posYobj3;
 		 }
 		 } else {
 		 if(posYobj3 < 128){
-			 removeTruck(lcd, prevposXobj3, prevposYobj3);
+			 removeTruck(lcd, prevposXobj3, object[2].posY);
 			 drawTruck(lcd, object[2].posX, posYobj3, object[2].rgb);
-			 object[2].posY = posYobj2;
+			 object[2].posY = posYobj3;
 		 }
 	 }
 	 
-	 
-	 prevposYobj1 = posYobj1;
-	 prevposYobj2 = posYobj2;
-	 prevposYobj3 = posYobj3;
 	 prevposXobj1 = object[0].posX;
 	 prevposXobj2 = object[1].posX;
 	 prevposXobj3 = object[2].posX;
@@ -300,14 +287,13 @@
 		 
 		 posYobj2++;
 		 keepObj2Alive = 1;
-		 
 	 }
 	 
 	 if(posYobj1 > 12 || keepObj3Alive){
 		 
-		 
 		 posYobj3++;
 		 keepObj3Alive = 1;
+		 
 	 }
 	 counter++;
  }
@@ -350,21 +336,17 @@ extern void showGame(MI0283QT9 lcd){
 	posYobj2 = 0;
 	posYobj3 = 0;
 
-	prevposYobj1 = 0;
-	prevposYobj2 = 0;
-	prevposYobj3 = 0;
-
 	prevposXobj1 = 0;
 	prevposXobj2 = 0;
 	prevposXobj3 = 0;
 
-	keepObj1Alive = 0;
 	keepObj2Alive = 0;
 	keepObj3Alive = 0;
 	
 	if(preTime){
 		preGeninit();
 	}
+	
 	
 	//start game loop
 	while(1){
@@ -380,15 +362,10 @@ extern void showGame(MI0283QT9 lcd){
 			posYobj2 = 0;
 			posYobj3 = 0;
 
-			prevposYobj1 = 0;
-			prevposYobj2 = 0;
-			prevposYobj3 = 0;
-
 			prevposXobj1 = 0;
 			prevposXobj2 = 0;
 			prevposXobj3 = 0;
 
-			keepObj1Alive = 0;
 			keepObj2Alive = 0;
 			keepObj3Alive = 0;
 			
@@ -412,10 +389,13 @@ extern void showGame(MI0283QT9 lcd){
 			if (sLow == 1)
 			{
 				pSensitivity = 5;
-			} else if (sMedium == 1)
+			} 
+			else if (sMedium == 1)
 			{
 				pSensitivity = 4;
-				} else if (sHigh == 1){
+			}
+			else if (sHigh == 1)
+			{
 				pSensitivity = 3;
 			}
 			
@@ -430,7 +410,7 @@ extern void showGame(MI0283QT9 lcd){
 		drawCar(lcd, x, 12,colored);
 		
 		//If obj1 is at you y location, check if objectx = playerx
-		if((object[0].type == 1 && posYobj1 >= 12 && posYobj1<17) || (object[0].type == 2 && posYobj1>= 12 && posYobj1<23)){
+		if((object[0].type == 1 && posYobj1 >= 12 && posYobj1<17) || (object[0].type == 2 && posYobj1>= 12 && posYobj1<24)){
 			if (object[0].posX == x ) {
 				showGameOverMenu(lcd, score);
 				}else{
@@ -440,7 +420,7 @@ extern void showGame(MI0283QT9 lcd){
 						score++;
 						prevScore1++;
 					}
-					}else if(object[0].type == 2){
+				}else if(object[0].type == 2){
 					if (prevScore1 == 0)
 					{
 						score = score + 2;
@@ -451,28 +431,39 @@ extern void showGame(MI0283QT9 lcd){
 		}
 		
 		//If obj2 is at player y location, check if objectx = playerx
-		if((object[1].type == 1 && posYobj2 >= 12 && posYobj2<17) || (object[1].type == 2 && posYobj2>= 12 && posYobj2<22)){
-			if (object[1].posX == x) {
+		if((object[1].type == 1 && posYobj2 >= 12 && posYobj2<17) || (object[1].type == 2 && posYobj2>= 12 && posYobj2<24)){
+			if (object[1].posX == x) {				
 				showGameOverMenu(lcd,score);
-				}else{
+			}else{
+					
 				if (object[0].type == 1){
 					if (prevScore2 == 0)
 					{
-						score++;
-						prevScore2++;
+						if(setT){
+							score++;
+							prevScore2++;
+						} else {
+							score++;
+							prevScore2++;
+						}
+						
 					}
-					}else if(object[0].type == 2){
+				}
+				else if(object[0].type == 2)
+				{
 					if (prevScore2 == 0)
 					{
 						score = score + 2;
 						prevScore2++;
 					}
 				}
+				
+				
 			}
 		}
 		
 		//If obj3 is at player y location, check if objectx = playerx
-		if((object[2].type == 1 && posYobj3 >= 12 && posYobj3<17) || (object[2].type == 2 && posYobj3>= 12 && posYobj3<22)){
+		if((object[2].type == 1 && posYobj3 >= 12 && posYobj3<17) || (object[2].type == 2 && posYobj3>= 12 && posYobj3<24)){
 			if (object[2].posX == x) {
 				showGameOverMenu(lcd,score);
 				}else{
@@ -505,11 +496,15 @@ extern void showGame(MI0283QT9 lcd){
 		
 		//draws car at x depending on tilt, and y = 12 (front of car), y = 15 end of car
 		if(nun.retreive_data()){
+			
+			
 			if (nun.getC() ==1) {
 				showPauseMenu(lcd);
 			}
+			
+			
 			//if nunchuck is tilted right, increment x
-			if(nun.getAccX() > 148){
+			if((nun.getAccX() > 148 && setT) || (nun.getJoyX() > 150 && setY)){
 				if(movCounter == 0){
 					removeCar(lcd, x, 12);
 					if(x<4){
@@ -526,7 +521,7 @@ extern void showGame(MI0283QT9 lcd){
 			}
 			//draw car at x location
 			//if nunchuck is tilted left, substract 1 from x
-			else if(nun.getAccX() > 70 && nun.getAccX() < 108){
+			else if((nun.getAccX() > 70 && nun.getAccX() < 108 && setT) || (nun.getJoyX() < 90 && setY)){
 				if(movCounter==0){
 					removeCar(lcd, x, 12);
 					if(x>0){

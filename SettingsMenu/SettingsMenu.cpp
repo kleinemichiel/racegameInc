@@ -23,6 +23,9 @@ extern uint8_t red = 255;
 extern uint8_t blue = 255;
 extern uint8_t green = 255;
 
+extern uint8_t setY = 1;
+extern uint8_t setT = 0;
+
 void showSensitivity(MI0283QT9 lcd){
 	
 	uint8_t sUp = 0;
@@ -30,7 +33,7 @@ void showSensitivity(MI0283QT9 lcd){
 	uint8_t sStart = 0;
 	
 	while(1){
-		lcd.drawText(0, 15, "Sensitivity", OBJECTCOLOR, BACKGROUND, 3);
+		lcd.drawText(0, 15, "TiltSens", OBJECTCOLOR, BACKGROUND, 3);
 	
 		//drawing checkboxes and text on screen
 		
@@ -109,6 +112,71 @@ void showSensitivity(MI0283QT9 lcd){
 			break;
 		}
 	}
+}
+
+void showController(MI0283QT9 lcd){
+		uint8_t up = 0;
+		uint8_t down = 0;
+		uint8_t start = 0;
+		
+		
+		while(1){
+			char title[] = "NunChuck";
+			uint8_t lengthOfString = (strlen(title) * 26);
+			uint8_t x = (240 - lengthOfString);
+			
+			lcd.drawText(x, 15, title, OBJECTCOLOR, BACKGROUND, 3);
+			
+			lcd.drawText(15, 80 , "Joystick:", OBJECTCOLOR, BACKGROUND, 2);
+			drawCheckbox(lcd, 177, (87 - 24), 48, &setY);
+			
+			lcd.drawText(15, 150, "Tilt    :", OBJECTCOLOR, BACKGROUND, 2);
+			drawCheckbox(lcd, 177, (157 - 24), 48, &setT);
+			
+			
+			
+			if(setY && !start){
+				up = 1;
+				down = 0;
+				start = 1;
+			} else if(setT && !start){
+				up = 0;
+				down = 1;
+				start = 1;
+			}
+			
+			if(setY && up){
+				
+				if(setT){
+					setY = 0;
+					up = 0;
+					down = 1;
+				}
+				
+			}
+			
+			if(setT && down){
+				if(setY){
+					setT = 0;
+					up = 1;
+					down = 0;
+				}
+			}
+			
+			
+			if(drawButton(lcd, "TiltSens", 20, 200, 200, 40))
+			{
+				lcd.fillScreen(BACKGROUND);
+				showSensitivity(lcd);
+			}
+			
+			if(drawButton(lcd, "Back", 20, 270, 200, 40)){
+				lcd.fillScreen(BACKGROUND);
+				break;
+			}
+			
+			
+		}
 }
 
 void showPlayerColor(MI0283QT9 lcd){
@@ -252,10 +320,10 @@ void ShowPlayerSettings(MI0283QT9 lcd){
 			showPlayerColor(lcd);
 		}
 		
-		if(drawButton(lcd, "Sensitivity", 20, 195, 200, 40))
+		if(drawButton(lcd, "NunChuck", 20, 195, 200, 40))
 		{
 			lcd.fillScreen(BACKGROUND);
-			showSensitivity(lcd);
+			showController(lcd);
 		}
 		if(drawButton(lcd, "Back", 20, 270, 200, 40)){
 			lcd.fillScreen(BACKGROUND);
