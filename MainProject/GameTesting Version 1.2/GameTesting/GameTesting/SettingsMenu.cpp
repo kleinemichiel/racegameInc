@@ -34,7 +34,6 @@ void showSensitivity(MI0283QT9 lcd){
 	
 	while(1){
 		if(returnToMain){
-			lcd.fillScreen(BACKGROUND);
 			break;
 		}
 		
@@ -111,11 +110,11 @@ void showSensitivity(MI0283QT9 lcd){
 				sDown = 0;
 			}
 		}
-		if(drawButton(lcd,"H", 20,270, 75, 40)){
+		if(drawButton(lcd,"H", 20,270, 95, 40)){
 			returnToMain = 1;
 		}
 	
-		if(drawButton(lcd, "B", 105, 270, 75, 40)){
+		if(drawButton(lcd, "B", 105, 270, 95, 40)){
 			lcd.fillScreen(BACKGROUND);
 			break;
 		}
@@ -130,7 +129,6 @@ void showController(MI0283QT9 lcd){
 		
 		while(1){
 			if(returnToMain){
-				lcd.fillScreen(BACKGROUND);
 				break;
 			}
 			char title[] = "NunChuck";
@@ -182,11 +180,11 @@ void showController(MI0283QT9 lcd){
 				showSensitivity(lcd);
 			}
 			
-			if(drawButton(lcd,"H", 20,270, 75, 40)){
+			if(drawButton(lcd,"H", 20,270, 95, 40)){
 				returnToMain = 1;
 			}
 			
-			if(drawButton(lcd, "B", 105, 270, 75, 40)){
+			if(drawButton(lcd, "B", 105, 270, 95, 40)){
 				lcd.fillScreen(BACKGROUND);
 				break;
 			}
@@ -239,7 +237,6 @@ void showDifficulty(MI0283QT9 lcd){
 	
 	while(1){
 		if(returnToMain){
-			lcd.fillScreen(BACKGROUND);
 			break;
 		}
 		
@@ -317,11 +314,11 @@ void showDifficulty(MI0283QT9 lcd){
 		}
 		
 		
-		if(drawButton(lcd,"H", 20,270, 75, 40)){
+		if(drawButton(lcd,"H", 20,270, 95, 40)){
 			returnToMain = 1;
 		}
 		
-		if(drawButton(lcd, "B", 105, 270, 75, 40)){
+		if(drawButton(lcd, "B", 105, 270, 95, 40)){
 			lcd.fillScreen(BACKGROUND);
 			break;
 		}
@@ -332,7 +329,6 @@ void showDifficulty(MI0283QT9 lcd){
 void ShowPlayerSettings(MI0283QT9 lcd){
 	while(1){
 		if(returnToMain){
-			lcd.fillScreen(BACKGROUND);
 			break;
 		}
 		
@@ -355,11 +351,11 @@ void ShowPlayerSettings(MI0283QT9 lcd){
 			lcd.fillScreen(BACKGROUND);
 			showController(lcd);
 		}
-		if(drawButton(lcd,"H", 20,270, 75, 40)){
+		if(drawButton(lcd,"H", 20,270, 95, 40)){
 			returnToMain = 1;
 		}
 		
-		if(drawButton(lcd, "B", 105, 270, 75, 40)){
+		if(drawButton(lcd, "B", 105, 270, 95, 40)){
 			lcd.fillScreen(BACKGROUND);
 			break;
 		}
@@ -375,7 +371,6 @@ void showGenerator(MI0283QT9 lcd){
 	uint8_t start = 0;
 	while(1){
 		if(returnToMain){
-			lcd.fillScreen(BACKGROUND);
 			break;
 		}
 		
@@ -422,11 +417,11 @@ void showGenerator(MI0283QT9 lcd){
 		
 		
 		
-		if(drawButton(lcd,"H", 20,270, 75, 40)){
+		if(drawButton(lcd,"H", 20,270, 95, 40)){
 			returnToMain = 1;
 		}
 		
-		if(drawButton(lcd, "B", 105, 270, 75, 40)){
+		if(drawButton(lcd, "B", 105, 270, 95, 40)){
 			lcd.fillScreen(BACKGROUND);
 			break;
 		}
