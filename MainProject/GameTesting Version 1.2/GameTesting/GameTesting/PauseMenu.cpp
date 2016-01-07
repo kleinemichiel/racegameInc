@@ -13,11 +13,8 @@ extern void showPauseMenu(MI0283QT9 lcd){
 	
 	while(1){
 		
-		char title[] = "PauseMenu";
-		uint8_t lengthOfString = (strlen(title) * 26);
-		uint8_t x = (240 - lengthOfString);
 		
-		lcd.drawText(x, 15, "Pause", OBJECTCOLOR, BACKGROUND, 3);
+		lcd.drawText(centerText("Pause", 3), 15, "Pause", OBJECTCOLOR, BACKGROUND, 3);
 		if(drawButton(lcd, "Resume Game", 20, 75, 200, 40)){	
 			showDefaultLayout(lcd);
 			break;

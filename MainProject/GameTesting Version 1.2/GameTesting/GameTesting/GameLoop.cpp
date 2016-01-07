@@ -4,17 +4,19 @@
 
 #include "GameLoop.h"
 
+
+
+
+
  NUNCHUCK nun;
  //objects
  //-posX
  //-posY
  //type (1 = car, 2 = truck) same goes for points
 
- objects object[2];
- objects preGenObjects[128];
-
-
- //generates objects, parameter: position of object in array
+objects object[2];
+objects preGenObjects[128];
+ // generates objects, parameter: position of object in array
  void genNewObjects(uint8_t objectReGen)
  {
 	 uint8_t rPosX = rand() % 5;
@@ -201,10 +203,11 @@
 		 
 	 }
 	 
-	 uint8_t yCompare = GRIDYLENGTH + 7;
+	 uint8_t yCompare = GRIDYLENGTH + 9;
 	 uint8_t rgbcolor[] = {255,255,255};
 	 if(posYobj1 == yCompare){
 		 posYobj1 = 0;
+		 removeTruck(lcd, prevposXobj1, object[0].posY);
 		 if(preTime){
 			 
 			arrayShifter(0);
@@ -215,6 +218,7 @@
 	 } else if(posYobj2 == yCompare){
 		 posYobj2 = 0;
 		 keepObj2Alive = 0;
+		 removeTruck(lcd, prevposXobj2, object[1].posY);
 		  if(preTime){
 			 
 			  arrayShifter(1);
@@ -225,7 +229,7 @@
 	 } else if(posYobj3 == yCompare){
 		 posYobj3 = 0;
 		 keepObj3Alive = 0;
-		 
+		 removeTruck(lcd, prevposXobj3, object[2].posY);
 		  if(preTime){
 			  
 			  arrayShifter(2);
@@ -242,51 +246,33 @@
 		 removeCar(lcd, prevposXobj1, object[0].posY);
 		 drawCar(lcd, object[0].posX, posYobj1, object[0].rgb);
 		 object[0].posY = posYobj1;
-		} else {
+	 } else {
 		 removeTruck(lcd, prevposXobj1, object[0].posY);
 		 drawTruck(lcd, object[0].posX, posYobj1, object[0].rgb);
 		 object[0].posY = posYobj1;
 	 }
-	 
-	 if(object[1].type == 1){
-		 if(posYobj2 < 128){
-			 removeCar(lcd, prevposXobj2, object[1].posY);
-			 drawCar(lcd, object[1].posX, posYobj2, object[1].rgb);
-			 object[1].posY = posYobj2;
-		 }
-		 } else {
-		 if(posYobj2 < 128){
-			 removeTruck(lcd, prevposXobj2, object[1].posY);
-			 drawTruck(lcd, object[1].posX, posYobj2, rgbcolor);
-			 object[1].posY = posYobj2;
-		 }
-	 }
-	 
-	 if(object[2].type == 1){
-		 if(posYobj3 < 128){
-			 removeCar(lcd, prevposXobj3, object[2].posY);
-			 drawCar(lcd, object[2].posX, posYobj3, object[2].rgb);
-			 object[2].posY = posYobj3;
-		 }
-		 } else {
-		 if(posYobj3 < 128){
-			 removeTruck(lcd, prevposXobj3, object[2].posY);
-			 drawTruck(lcd, object[2].posX, posYobj3, object[2].rgb);
-			 object[2].posY = posYobj3;
-		 }
-	 }
-	 
-	 prevposXobj1 = object[0].posX;
-	 prevposXobj2 = object[1].posX;
-	 prevposXobj3 = object[2].posX;
-	 
-	 
+	
 	 posYobj1++;
 	 
 	 if(posYobj1 > 6 || keepObj2Alive){
 		 
 		 posYobj2++;
 		 keepObj2Alive = 1;
+		 
+		  
+		  if(object[1].type == 1){
+			  if(posYobj2 < 128){
+				  removeCar(lcd, prevposXobj2, object[1].posY);
+				  drawCar(lcd, object[1].posX, posYobj2, object[1].rgb);
+				  object[1].posY = posYobj2;
+			  }
+			  } else {
+			  if(posYobj2 < 128){
+				  removeTruck(lcd, prevposXobj2, object[1].posY);
+				  drawTruck(lcd, object[1].posX, posYobj2, rgbcolor);
+				  object[1].posY = posYobj2;
+			  }
+		  }
 	 }
 	 
 	 if(posYobj1 > 12 || keepObj3Alive){
@@ -294,25 +280,53 @@
 		 posYobj3++;
 		 keepObj3Alive = 1;
 		 
+		 if(object[2].type == 1){
+			 if(posYobj3 < 128){
+				 removeCar(lcd, prevposXobj3, object[2].posY);
+				 drawCar(lcd, object[2].posX, posYobj3, object[2].rgb);
+				 object[2].posY = posYobj3;
+			 }
+			 } else {
+			 if(posYobj3 < 128){
+				 removeTruck(lcd, prevposXobj3, object[2].posY);
+				 drawTruck(lcd, object[2].posX, posYobj3, object[2].rgb);
+				 object[2].posY = posYobj3;
+			 }
+		 }
+		 
+		 
 	 }
+	 
+	 
+	 
+	 prevposXobj1 = object[0].posX;
+	 prevposXobj2 = object[1].posX;
+	 prevposXobj3 = object[2].posX;
+	 
+	 
 	 counter++;
  }
  
- 
-
-
 //main game loop 
 extern void showGame(MI0283QT9 lcd){
+	//setup seed
 	
+	uint16_t seed = (rand() % 65534) + 1;
+	srand(seed);
 	
+	//setup car
 	uint8_t x = 2;
 	uint8_t movCounter = 0;
 	uint8_t colored[] = {red,green,blue};
-	uint16_t score = 0;
+	uint16_t score = 0;/*
 	uint16_t prevScore1 = 0;
 	uint16_t prevScore2 = 0;
-	uint16_t prevScore3 = 0;
+	uint16_t prevScore3 = 0;*/
 	uint8_t pSensitivity = 0;
+	
+	object[2];
+	objects preGenObjects[128];
+
 	
 	if (sLow == 1)
 	{
@@ -320,17 +334,18 @@ extern void showGame(MI0283QT9 lcd){
 	} else if (sMedium == 1)
 	{
 		pSensitivity = 4;
-		} else if (sHigh == 1){
+	} else if (sHigh == 1){
 		pSensitivity = 3;
 	}
 	
 	//Draw game road
 	showDefaultLayout(lcd);
 	
+	if(preTime){
+		preGeninit();
+	}
+	
 	nun.nunchuck_init();
-	object[2];
-	objects preGenObjects[128];
-
 
 	posYobj1 = 0;
 	posYobj2 = 0;
@@ -343,9 +358,9 @@ extern void showGame(MI0283QT9 lcd){
 	keepObj2Alive = 0;
 	keepObj3Alive = 0;
 	
-	if(preTime){
-		preGeninit();
-	}
+	uint8_t carHitMax = 15;
+	uint8_t truckHitmax = 18;
+	
 	
 	
 	//start game loop
@@ -371,7 +386,7 @@ extern void showGame(MI0283QT9 lcd){
 			
 			
 			//Draw game road
-			object[2];
+			objects object[2];
 			objects preGenObjects[128];
 			
 			x = 2;
@@ -380,10 +395,10 @@ extern void showGame(MI0283QT9 lcd){
 			colored[0] = red;
 			colored[1] = green;
 			colored[2] = blue;
-			score = 0;
+			score = 0;/*
 			prevScore1 = 0;
 			prevScore2 = 0;
-			prevScore3 = 0;
+			prevScore3 = 0;*/
 			pSensitivity = 0;
 			
 			if (sLow == 1)
@@ -401,6 +416,7 @@ extern void showGame(MI0283QT9 lcd){
 			
 			showDefaultLayout(lcd);
 			
+			onBeginB = 0;
 			restartGame = 0;
 		}
 		//shows the enemy cars
@@ -409,90 +425,45 @@ extern void showGame(MI0283QT9 lcd){
 		//Draw player car at start location
 		drawCar(lcd, x, 12,colored);
 		
+		
+		
+		
 		//If obj1 is at you y location, check if objectx = playerx
-		if((object[0].type == 1 && posYobj1 >= 12 && posYobj1<17) || (object[0].type == 2 && posYobj1>= 12 && posYobj1<24)){
+		if((object[0].type == 1 && object[0].posY >= 12  && object[0].posY <= carHitMax ) || (object[0].type == 2 && object[0].posY >= 12 && object[0].posY <= truckHitmax)){
 			if (object[0].posX == x ) {
 				showGameOverMenu(lcd, score);
-				}else{
-				if (object[0].type == 1){
-					if (prevScore1 == 0)
-					{
-						score++;
-						prevScore1++;
-					}
-				}else if(object[0].type == 2){
-					if (prevScore1 == 0)
-					{
-						score = score + 2;
-						prevScore1++;
-					}
+			}else{
+				
+				if(object[0].posY == carHitMax  || object[0].posY == truckHitmax){
+					score = object[0].type + score;
 				}
+				
+				
 			}
-		}
-		
-		//If obj2 is at player y location, check if objectx = playerx
-		if((object[1].type == 1 && posYobj2 >= 12 && posYobj2<17) || (object[1].type == 2 && posYobj2>= 12 && posYobj2<24)){
+		}else if((object[1].type == 1 && object[1].posY >= 12 && object[1].posY <= carHitMax ) || (object[1].type == 2 && object[1].posY >= 12 && object[1].posY <= truckHitmax)){
+			//If obj2 is at player y location, check if objectx = playerx
 			if (object[1].posX == x) {				
 				showGameOverMenu(lcd,score);
 			}else{
-					
-				if (object[0].type == 1){
-					if (prevScore2 == 0)
-					{
-						if(setT){
-							score++;
-							prevScore2++;
-						} else {
-							score++;
-							prevScore2++;
-						}
-						
-					}
-				}
-				else if(object[0].type == 2)
-				{
-					if (prevScore2 == 0)
-					{
-						score = score + 2;
-						prevScore2++;
-					}
-				}
 				
-				
+				if(object[1].posY == carHitMax  || object[1].posY == truckHitmax){
+					score = object[1].type + score;
+				}
 			}
-		}
-		
-		//If obj3 is at player y location, check if objectx = playerx
-		if((object[2].type == 1 && posYobj3 >= 12 && posYobj3<17) || (object[2].type == 2 && posYobj3>= 12 && posYobj3<24)){
+		} else if((object[2].type == 1 && object[2].posY >= 12 && object[2].posY <= carHitMax ) || (object[2].type == 2 && object[2].posY >= 12 && object[2].posY <= truckHitmax)){
+			
+			//If obj3 is at player y location, check if objectx = playerx
 			if (object[2].posX == x) {
 				showGameOverMenu(lcd,score);
-				}else{
-				if (object[0].type == 1){
-					if (prevScore3 == 0)
-					{
-						score++;
-						prevScore3++;
-					}
-					}else if(object[0].type == 2){
-					if (prevScore3 == 0)
-					{
-						score = score + 2;
-						prevScore3++;
-					}
+			}else{
+				
+				if(object[2].posY == carHitMax || object[2].posY == truckHitmax){
+					score = object[2].type + score;
 				}
 			}
 		}
 		
-		if (posYobj1 == 1)
-		{
-			prevScore1 = 0;
-		}else if (posYobj2 == 1)
-		{
-			prevScore2 = 0;
-		}else if (posYobj3 == 1)
-		{
-			prevScore3 = 0;
-		}
+		
 		
 		//draws car at x depending on tilt, and y = 12 (front of car), y = 15 end of car
 		if(nun.retreive_data()){

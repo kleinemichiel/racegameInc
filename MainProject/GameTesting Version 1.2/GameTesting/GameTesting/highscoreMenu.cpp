@@ -31,10 +31,8 @@ extern void showHighscoreMenu(MI0283QT9 lcd){
 	while(1){
 		
 		char title[] = "Highscore";
-		uint8_t lengthOfString = (strlen(title) * 26); 
-		uint8_t x = (240 - lengthOfString);
 		
-		lcd.drawText(x, 15, title, OBJECTCOLOR, BACKGROUND, 3);
+		lcd.drawText(centerText(title, 3), 15, title, OBJECTCOLOR, BACKGROUND, 3);
 		
 		lcd.drawText(20, 75, "1", OBJECTCOLOR, BACKGROUND, 2);
 		lcd.drawText(70, 75, readFromEeprom, OBJECTCOLOR, BACKGROUND, 2);

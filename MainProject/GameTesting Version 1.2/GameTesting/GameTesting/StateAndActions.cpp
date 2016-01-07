@@ -9,3 +9,4 @@
 
 uint8_t returnToMain = 0;
 uint8_t restartGame = 0;
+uint8_t resetScreen = 0;

@@ -12,4 +12,5 @@
 #include "stdint.h"
 extern uint8_t returnToMain;
 extern uint8_t restartGame;
+extern uint8_t resetScreen;
 #endif /* STATEANDACTIONS_H_ */

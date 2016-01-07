@@ -7,6 +7,8 @@
 
 #pragma once
 
+#define ADDRESS 0x36
+
 #include <EEPROM.h>
 #include "stdint.h"
 #include "digitalWriteFast.h"
@@ -24,6 +26,7 @@
 #include "Default_Layout.h"
 #include "GridLayout.h"
 #include "GameObjects.h"
+#include "Multiplayer.h"
 #include "GameLoop.h"
 
 /*

@@ -32,16 +32,16 @@ struct truck
 	uint8_t score = lengte;
 };
 
-
-//holds information for all the objects which are going to be printed on screen
-typedef struct objects
+struct objects
 {
 	uint8_t posY;
 	uint8_t posX;
 	uint8_t type;   //type 1 = car, type 2 = truck
 	uint8_t rgb[2];
 	
-} objects;
+};
+
+//holds information for all the objects which are going to be printed on screen
 
 
 #endif /* INCFILE1_H_ */
