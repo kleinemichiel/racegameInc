@@ -4,10 +4,6 @@
 
 #include "GameLoop.h"
 
-
-
-
-
  NUNCHUCK nun;
  //objects
  //-posX
@@ -15,7 +11,7 @@
  //type (1 = car, 2 = truck) same goes for points
 
 objects object[2];
-objects preGenObjects[128];
+/*objects preGenObjects[128];*/
  // generates objects, parameter: position of object in array
  void genNewObjects(uint8_t objectReGen)
  {
@@ -58,6 +54,7 @@ objects preGenObjects[128];
  }
  
  
+/*
 
  void preGeninit(){
 	 
@@ -105,9 +102,11 @@ objects preGenObjects[128];
 	 object[2] = preGenObjects[2];
 
  }
+*/
 
 
  
+/*
  uint8_t object1PreGen = 0;
  uint8_t object2PreGen = 0;
  uint8_t object3PreGen = 0;
@@ -132,7 +131,7 @@ objects preGenObjects[128];
 		  }
 	 }
 	
- }
+ }*/
 
 
  uint8_t posYobj1 = 0;
@@ -147,17 +146,15 @@ objects preGenObjects[128];
  uint8_t keepObj3Alive = 0;
  
  uint8_t onBeginB = 0;
- uint8_t counter = 0;
  //shows the objects on screen - this loop is a example loop on how to print the objects!
  void showGenObjects(MI0283QT9 lcd){
 	
-	 if(!onBeginB && !preTime && realTime){
+	 if(!onBeginB){
 		 initGenObjects();
 		 onBeginB = 1;
 	 }
 	 //_delay_ms(150);
-	 if(hard == 1 && counter == 8){
-		 counter = 0;
+	 if(hard == 1 && (posYobj1 % 12) == 0){
 		 uint8_t operatordefine;
 		 
 		 if(object[0].posX == 4){
@@ -208,36 +205,19 @@ objects preGenObjects[128];
 	 if(posYobj1 == yCompare){
 		 posYobj1 = 0;
 		 removeTruck(lcd, prevposXobj1, object[0].posY);
-		 if(preTime){
-			 
-			arrayShifter(0);
-		 } else {
-			genNewObjects(0); 
-		 }
+		 genNewObjects(0);
 		 
 	 } else if(posYobj2 == yCompare){
 		 posYobj2 = 0;
 		 keepObj2Alive = 0;
 		 removeTruck(lcd, prevposXobj2, object[1].posY);
-		  if(preTime){
-			 
-			  arrayShifter(1);
-		  } else {
-			  genNewObjects(1);
-		  }
+		 genNewObjects(1);
 		 
 	 } else if(posYobj3 == yCompare){
 		 posYobj3 = 0;
 		 keepObj3Alive = 0;
 		 removeTruck(lcd, prevposXobj3, object[2].posY);
-		  if(preTime){
-			  
-			  arrayShifter(2);
-		
-			  
-	      } else {
-			  genNewObjects(2);
-		  }
+		 genNewObjects(2);
 		 
 	 }
 	 
@@ -303,8 +283,6 @@ objects preGenObjects[128];
 	 prevposXobj2 = object[1].posX;
 	 prevposXobj3 = object[2].posX;
 	 
-	 
-	 counter++;
  }
  
 //main game loop 
@@ -318,14 +296,11 @@ extern void showGame(MI0283QT9 lcd){
 	uint8_t x = 2;
 	uint8_t movCounter = 0;
 	uint8_t colored[] = {red,green,blue};
-	uint16_t score = 0;/*
-	uint16_t prevScore1 = 0;
-	uint16_t prevScore2 = 0;
-	uint16_t prevScore3 = 0;*/
+	uint16_t score = 0;
 	uint8_t pSensitivity = 0;
 	
 	object[2];
-	objects preGenObjects[128];
+	//objects preGenObjects[128];
 
 	
 	if (sLow == 1)
@@ -340,10 +315,6 @@ extern void showGame(MI0283QT9 lcd){
 	
 	//Draw game road
 	showDefaultLayout(lcd);
-	
-	if(preTime){
-		preGeninit();
-	}
 	
 	nun.nunchuck_init();
 
@@ -362,9 +333,12 @@ extern void showGame(MI0283QT9 lcd){
 	uint8_t truckHitmax = 18;
 	
 	
+	uint8_t countDown = 3;
 	
 	//start game loop
 	while(1){
+		
+		
 		
 		if(returnToMain){
 			returnToMain = 0;
@@ -418,6 +392,20 @@ extern void showGame(MI0283QT9 lcd){
 			
 			onBeginB = 0;
 			restartGame = 0;
+			countDown = 3;
+		}
+		
+		//countdown before game start
+		while(countDown != 0){
+			lcd.drawInteger(centerText(" ", 3), 150, countDown, DEC, OBJECTCOLOR, BACKGROUND, 3);
+			_delay_ms(1000);
+			lcd.drawInteger(centerText(" ", 3), 150, countDown, DEC, BACKGROUND, BACKGROUND, 3);
+			if(countDown == 1){
+				lcd.drawText(centerText("START" , 3), 150, "START", OBJECTCOLOR, BACKGROUND, 3);
+				_delay_ms(1000);
+				lcd.drawText(centerText("START" , 3), 150, "START", BACKGROUND, BACKGROUND, 3);
+			}
+			countDown--;
 		}
 		//shows the enemy cars
 		showGenObjects(lcd);
@@ -475,7 +463,7 @@ extern void showGame(MI0283QT9 lcd){
 			
 			
 			//if nunchuck is tilted right, increment x
-			if((nun.getAccX() > 148 && setT) || (nun.getJoyX() > 150 && setY)){
+			if(nun.getAccX() > 148 || nun.getJoyX() > 150){
 				if(movCounter == 0){
 					removeCar(lcd, x, 12);
 					if(x<4){
@@ -492,7 +480,7 @@ extern void showGame(MI0283QT9 lcd){
 			}
 			//draw car at x location
 			//if nunchuck is tilted left, substract 1 from x
-			else if((nun.getAccX() > 70 && nun.getAccX() < 108 && setT) || (nun.getJoyX() < 90 && setY)){
+			else if((nun.getAccX() > 70 && nun.getAccX() < 108) || nun.getJoyX() < 90){
 				if(movCounter==0){
 					removeCar(lcd, x, 12);
 					if(x>0){
@@ -508,7 +496,7 @@ extern void showGame(MI0283QT9 lcd){
 				//draw car at x location
 				drawCar(lcd, x, 12, colored);
 				//if nunchuck is in middle, movCounter = 0
-				}else if(nun.getAccX() > 120 && nun.getAccX() < 136){
+			}else if(nun.getAccX() > 120 && nun.getAccX() < 136){
 				movCounter = 0;
 			}
 			

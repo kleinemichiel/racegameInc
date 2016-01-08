@@ -8,9 +8,6 @@
 #include "SettingsMenu.h"
 
 //these are values which are being set in the setting menu
-extern uint8_t realTime = 1;
-extern uint8_t preTime = 0;
-
 extern uint8_t easy = 1;
 extern uint8_t medium = 0;
 extern uint8_t hard = 0;
@@ -22,11 +19,6 @@ extern uint8_t sHigh = 0;
 extern uint8_t red = 255;
 extern uint8_t blue = 255;
 extern uint8_t green = 255;
-
-extern uint8_t setY = 1;
-extern uint8_t setT = 1;
-
-
 
 void showPlayerColor(MI0283QT9 lcd){
 	

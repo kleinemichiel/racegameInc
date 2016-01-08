@@ -320,6 +320,12 @@
     <Compile Include="MI0283QT9.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Multiplayer.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Multiplayer.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="NunChuck.cpp">
       <SubType>compile</SubType>
     </Compile>

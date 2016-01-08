@@ -7,7 +7,58 @@
 
 #include "GameOverMenu.h"
 
-
+void showGameOverMenuMP(MI0283QT9 lcd, uint16_t score){
+	while(1){
+		if(true /*you won */){
+			char title[] = "You Won!";
+			
+			lcd.drawText(centerText(title,3), 15, title, OBJECTCOLOR, BACKGROUND, 3);
+			
+			
+			lcd.drawText(centerText("Your Score:", 2), 60, "Your Score:", OBJECTCOLOR, BACKGROUND, 2);
+			
+			lcd.drawInteger(70, 100, score, DEC, OBJECTCOLOR, BACKGROUND, 3);
+			
+			
+			if(drawButton(lcd, "Restart", 20, 220, 200, 40))
+			{
+				showMpMenu(lcd);
+			}
+			
+			//button for opening sub menu generator
+			if(drawButton(lcd, "Main Menu", 20, 270, 200, 40))
+			{
+				lcd.fillScreen(BACKGROUND);
+				returnToMain = 1;
+				break;
+			}
+			
+		}else{
+			char title[] = "You Lost!";
+			
+			lcd.drawText(centerText(title,3), 15, title, OBJECTCOLOR, BACKGROUND, 3);
+			
+			
+			lcd.drawText(centerText("Your Score:", 2), 60, "Your Score:", OBJECTCOLOR, BACKGROUND, 2);
+			
+			lcd.drawInteger(70, 100, score, DEC, OBJECTCOLOR, BACKGROUND, 3);
+			
+			
+			if(drawButton(lcd, "Restart", 20, 220, 200, 40))
+			{
+				showMpMenu(lcd);
+			}
+			
+			//button for opening sub menu generator
+			if(drawButton(lcd, "Main Menu", 20, 270, 200, 40))
+			{
+				lcd.fillScreen(BACKGROUND);
+				returnToMain = 1;
+				break;
+			}
+		}
+	}
+}
 
 void showNoHighScore(MI0283QT9 lcd, uint16_t score,  uint8_t isHighscore){
 	while(1){
@@ -19,14 +70,15 @@ void showNoHighScore(MI0283QT9 lcd, uint16_t score,  uint8_t isHighscore){
 			
 			
 			
-			lcd.drawText(15, 60, "Your Score:", OBJECTCOLOR, BACKGROUND, 2);
-			if(setT){
-				lcd.drawText(15, 80, "Tilt Bonus (x2):", OBJECTCOLOR, BACKGROUND, 1);
+			lcd.drawText(centerText("Your Score:", 2), 50, "Your Score:", OBJECTCOLOR, BACKGROUND, 2);
+			if(hard){
+				lcd.drawText(centerText("Hard Bonus Score ( x 2)!", 1), 75, "Hard Bonus Score ( x 2)!", OBJECTCOLOR, BACKGROUND, 1);
 			}
+			
 			lcd.drawInteger(70, 100, score, DEC, OBJECTCOLOR, BACKGROUND, 3);
 			
 			
-			lcd.drawText(15, 140, "You Need:", OBJECTCOLOR, BACKGROUND, 2);
+			lcd.drawText(centerText("Your Need:", 2), 140, "You Need:", OBJECTCOLOR, BACKGROUND, 2);
 			
 			lcd.drawInteger(70, 170, EEPROM.read(173), DEC, OBJECTCOLOR, BACKGROUND, 3);
 		} 
@@ -82,6 +134,9 @@ void showGameOverMenu(MI0283QT9 lcd, uint16_t score){
 		EEPROM.write(182, 'A');
 	}
 	
+	if(hard){
+		score = score * 2;
+	}
 	
 	
 	while(1){
@@ -107,6 +162,10 @@ void showGameOverMenu(MI0283QT9 lcd, uint16_t score){
 			lcd.drawText(centerText(title, 3), 15, title, OBJECTCOLOR, BACKGROUND, 3);
 			
 			lcd.drawText(centerText("Highscore!!!", 2), 40, "Highscore!!!", OBJECTCOLOR, BACKGROUND, 2);
+			if(hard){
+				lcd.drawText(centerText("Hard Bonus Score ( x 2)!", 1), 65, "Hard Bonus Score ( x 2)!", OBJECTCOLOR, BACKGROUND, 1);
+			}
+			
 			
 			lcd.drawInteger(70, 80, score, DEC, OBJECTCOLOR, BACKGROUND, 3);
 			
