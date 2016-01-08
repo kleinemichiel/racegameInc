@@ -7,16 +7,65 @@
 
 #include "GameOverMenu.h"
 
-
+void showGameOverMenuMP(MI0283QT9 lcd, uint16_t score){
+	while(1){
+		if(/*winner=1*/){
+			char title[] = "You Won!";
+			
+			lcd.drawText(centerText(title,3), 15, title, OBJECTCOLOR, BACKGROUND, 3);
+			
+			
+			lcd.drawText(15, 60, "Your Score:", OBJECTCOLOR, BACKGROUND, 2);
+			
+			lcd.drawInteger(70, 100, score, DEC, OBJECTCOLOR, BACKGROUND, 3);
+			
+			
+			if(drawButton(lcd, "Restart", 20, 220, 200, 40))
+			{
+				showMpMenu(lcd);
+			}
+			
+			//button for opening sub menu generator
+			if(drawButton(lcd, "Main Menu", 20, 270, 200, 40))
+			{
+				lcd.fillScreen(BACKGROUND);
+				returnToMain = 1;
+				break;
+			}
+			
+		}else{
+			char title[] = "You Lost!";
+			
+			lcd.drawText(centerText(title,3), 15, title, OBJECTCOLOR, BACKGROUND, 3);
+			
+			
+			lcd.drawText(15, 60, "Your Score:", OBJECTCOLOR, BACKGROUND, 2);
+			
+			lcd.drawInteger(70, 100, score, DEC, OBJECTCOLOR, BACKGROUND, 3);
+			
+			
+			if(drawButton(lcd, "Restart", 20, 220, 200, 40))
+			{
+				showMpMenu(lcd);
+			}
+			
+			//button for opening sub menu generator
+			if(drawButton(lcd, "Main Menu", 20, 270, 200, 40))
+			{
+				lcd.fillScreen(BACKGROUND);
+				returnToMain = 1;
+				break;
+			}
+		}
+	}
+}
 
 void showNoHighScore(MI0283QT9 lcd, uint16_t score,  uint8_t isHighscore){
 	while(1){
 		
 		char title[] = "You DIED!";
-		uint8_t lengthOfString = (strlen(title) * 26);
-		uint8_t x = (240 - lengthOfString);
 		
-		lcd.drawText(x, 15, title, OBJECTCOLOR, BACKGROUND, 3);
+		lcd.drawText(centerText(title, 3), 15, title, OBJECTCOLOR, BACKGROUND, 3);
 		if(!isHighscore){
 			
 			
@@ -85,9 +134,6 @@ void showGameOverMenu(MI0283QT9 lcd, uint16_t score){
 	}
 	
 	
-	if(setT){
-		score = score * 2;
-	}
 	
 	while(1){
 		
@@ -108,23 +154,16 @@ void showGameOverMenu(MI0283QT9 lcd, uint16_t score){
 		}else if(EEPROM.read(173) < score) {
 			
 			char title[] = "You DIED!";
-			uint8_t lengthOfString = (strlen(title) * 26);
-			uint8_t x = (245 - lengthOfString);
 			
-			lcd.drawText(x, 15, title, OBJECTCOLOR, BACKGROUND, 3);
+			lcd.drawText(centerText(title, 3), 15, title, OBJECTCOLOR, BACKGROUND, 3);
 			
-			lcd.drawText(15, 40, "Highscore!!!", OBJECTCOLOR, BACKGROUND, 2);
+			lcd.drawText(centerText("Highscore!!!", 2), 40, "Highscore!!!", OBJECTCOLOR, BACKGROUND, 2);
 			
-			if(setT){
-				lcd.drawText(15, 60, "Tilt Bonus (x2):", OBJECTCOLOR, BACKGROUND, 1);
-			}
 			lcd.drawInteger(70, 80, score, DEC, OBJECTCOLOR, BACKGROUND, 3);
 			
 			
 			char name[] = "Your Name?";
-			uint8_t lengthOfString2 = (strlen(name) * 20);
-			uint8_t x2 = (240 - lengthOfString2);
-			lcd.drawText(x2, 140, name, OBJECTCOLOR, BACKGROUND, 2);
+			lcd.drawText(centerText(name, 2), 140, name, OBJECTCOLOR, BACKGROUND, 2);
 			
 			char1 =	drawCharSelector(lcd, 35, 160, char1);
 			char2 =	drawCharSelector(lcd, 95, 160, char2);
