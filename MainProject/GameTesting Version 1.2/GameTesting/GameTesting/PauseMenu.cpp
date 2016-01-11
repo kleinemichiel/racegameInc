@@ -28,6 +28,7 @@ extern void showPauseMenu(MI0283QT9 lcd){
 		}
 		if(drawButton(lcd, "Main Menu", 20, 255, 200, 40)){
 			returnToMain = 1;
+			break;
 		}
 		
 	}
