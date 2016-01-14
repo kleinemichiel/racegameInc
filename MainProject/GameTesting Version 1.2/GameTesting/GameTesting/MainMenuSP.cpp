@@ -11,6 +11,8 @@
 
 uint8_t setValue = 0;
 
+/*Draw Main Menu with Singleplayer, Multiplayer, settings and highscore buttons.*/
+
 extern void showMainMenu(MI0283QT9 lcd){
 	
 	returnToMain = 0;
@@ -30,6 +32,7 @@ extern void showMainMenu(MI0283QT9 lcd){
 			
 			lcd.drawText(centerText(title, 3), 15, title, OBJECTCOLOR, BACKGROUND, 3);
 			
+			//draw the player car with the colour you have selected in the settings menu.
 			lcd.drawRect(100, 250, 40, 64, RGB(red,green,blue));
 			lcd.drawLine(100+1,250+16,100+10, 250+26, RGB(red,green,blue));
 			lcd.drawLine(100+39,250+16,100+30, 250+26, RGB(red,green,blue));

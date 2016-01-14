@@ -10,11 +10,9 @@
  //-posY
  //type (1 = car, 2 = truck) same goes for points
 
- objects object[2];
- objects preGenObjects[128];
-
-
- //generates objects, parameter: position of object in array
+objects object[2];
+/*objects preGenObjects[128];*/
+ // generates objects, parameter: position of object in array
  void genNewObjects(uint8_t objectReGen)
  {
 	 uint8_t rPosX = rand() % 5;
@@ -54,83 +52,6 @@
 		 genNewObjects(i);
 	 }
  }
- 
- 
-
- void preGeninit(){
-	 
-	 uint8_t counterPre =1;
-	 for(uint16_t i=0; i<128; i++){
-		 if(counterPre == 4){
-			 counterPre =1;
-		 }
-		 int RandomX = rand() % 5;
-		 int RandomType = rand() % 2+1;
-		 preGenObjects[i].posX = RandomX;
-		 preGenObjects[i].posY = 0;
-		 
-			uint8_t r = rand() % 105 + 150;
-			uint8_t g = rand() % 105 + 150;
-			uint8_t b = rand() % 105 + 150;
-			preGenObjects[i].rgb[0] = r;
-			preGenObjects[i].rgb[1] = g;
-			preGenObjects[i].rgb[2] = b;
-		 
-		 if(easy){
-			 preGenObjects[i].posX = RandomX;
-			 preGenObjects[i].type = 1;
-		 }else if(medium){
-		 	 preGenObjects[i].posX = RandomX;
-			 preGenObjects[i].type = RandomType;
-		 }else if(hard){
-			 preGenObjects[i].posX = RandomX;
-			 if(counterPre == 1){
-				 preGenObjects[i].type = 2;
-				 }else if(counterPre == 2){
-				 preGenObjects[i].type = 1;
-				 }else if(counterPre == 3){
-				 preGenObjects[i].type = 2;
-				 
-			 }
-			 counterPre++;
-			 
-		 }
-		 
-	 }
-	 
-	 object[0] = preGenObjects[0];
-	 object[1] = preGenObjects[1];
-	 object[2] = preGenObjects[2];
-
- }
-
-
- 
- uint8_t object1PreGen = 0;
- uint8_t object2PreGen = 0;
- uint8_t object3PreGen = 0;
- 
- void arrayShifter(uint8_t posOfObject){
-	 
-	 if((posOfObject * object1PreGen + 2) > 118){
-		  preGeninit();
-		  uint8_t object1PreGen = 0;
-		  uint8_t object2PreGen = 0;
-		  uint8_t object3PreGen = 0;
-	 } else {
-		  if(posOfObject == 0){
-			  object1PreGen++;
-			  object[posOfObject] = preGenObjects[1 * object1PreGen + 3];
-		  } else if(posOfObject == 1){
-			  object2PreGen++;
-			  object[posOfObject] = preGenObjects[2 * object2PreGen + 2];
-		  } else if(posOfObject == 2){
-			  object3PreGen++;
-			  object[posOfObject] = preGenObjects[3 * object3PreGen + 5];
-		  }
-	 }
-	
- }
 
 
  uint8_t posYobj1 = 0;
@@ -145,17 +66,20 @@
  uint8_t keepObj3Alive = 0;
  
  uint8_t onBeginB = 0;
- uint8_t counter = 0;
  //shows the objects on screen - this loop is a example loop on how to print the objects!
  void showGenObjects(MI0283QT9 lcd){
 	
-	 if(!onBeginB && !preTime && realTime){
+	 if(!onBeginB){
 		 initGenObjects();
 		 onBeginB = 1;
 	 }
 	 //_delay_ms(150);
-	 if(hard == 1 && counter == 8){
-		 counter = 0;
+	 
+	 /* 
+	 If you select hard mode the cars/trucks you have to dodge move on the x position. If the car/truck is on position 4 the car/truck will go left. If the car/truck is on position 0 the cars/trucks will go right.
+	 Otherwise the will go to a random direction.
+	 */
+	 if(hard == 1 && (posYobj1 % 12) == 0){
 		 uint8_t operatordefine;
 		 
 		 if(object[0].posX == 4){
@@ -201,39 +125,24 @@
 		 
 	 }
 	 
-	 uint8_t yCompare = GRIDYLENGTH + 7;
+	 uint8_t yCompare = GRIDYLENGTH + 9;
 	 uint8_t rgbcolor[] = {255,255,255};
 	 if(posYobj1 == yCompare){
 		 posYobj1 = 0;
-		 if(preTime){
-			 
-			arrayShifter(0);
-		 } else {
-			genNewObjects(0); 
-		 }
+		 removeTruck(lcd, prevposXobj1, object[0].posY);
+		 genNewObjects(0);
 		 
 	 } else if(posYobj2 == yCompare){
 		 posYobj2 = 0;
 		 keepObj2Alive = 0;
-		  if(preTime){
-			 
-			  arrayShifter(1);
-		  } else {
-			  genNewObjects(1);
-		  }
+		 removeTruck(lcd, prevposXobj2, object[1].posY);
+		 genNewObjects(1);
 		 
 	 } else if(posYobj3 == yCompare){
 		 posYobj3 = 0;
 		 keepObj3Alive = 0;
-		 
-		  if(preTime){
-			  
-			  arrayShifter(2);
-		
-			  
-	      } else {
-			  genNewObjects(2);
-		  }
+		 removeTruck(lcd, prevposXobj3, object[2].posY);
+		 genNewObjects(2);
 		 
 	 }
 	 
@@ -242,51 +151,33 @@
 		 removeCar(lcd, prevposXobj1, object[0].posY);
 		 drawCar(lcd, object[0].posX, posYobj1, object[0].rgb);
 		 object[0].posY = posYobj1;
-		} else {
+	 } else {
 		 removeTruck(lcd, prevposXobj1, object[0].posY);
 		 drawTruck(lcd, object[0].posX, posYobj1, object[0].rgb);
 		 object[0].posY = posYobj1;
 	 }
-	 
-	 if(object[1].type == 1){
-		 if(posYobj2 < 128){
-			 removeCar(lcd, prevposXobj2, object[1].posY);
-			 drawCar(lcd, object[1].posX, posYobj2, object[1].rgb);
-			 object[1].posY = posYobj2;
-		 }
-		 } else {
-		 if(posYobj2 < 128){
-			 removeTruck(lcd, prevposXobj2, object[1].posY);
-			 drawTruck(lcd, object[1].posX, posYobj2, rgbcolor);
-			 object[1].posY = posYobj2;
-		 }
-	 }
-	 
-	 if(object[2].type == 1){
-		 if(posYobj3 < 128){
-			 removeCar(lcd, prevposXobj3, object[2].posY);
-			 drawCar(lcd, object[2].posX, posYobj3, object[2].rgb);
-			 object[2].posY = posYobj3;
-		 }
-		 } else {
-		 if(posYobj3 < 128){
-			 removeTruck(lcd, prevposXobj3, object[2].posY);
-			 drawTruck(lcd, object[2].posX, posYobj3, object[2].rgb);
-			 object[2].posY = posYobj3;
-		 }
-	 }
-	 
-	 prevposXobj1 = object[0].posX;
-	 prevposXobj2 = object[1].posX;
-	 prevposXobj3 = object[2].posX;
-	 
-	 
+	
 	 posYobj1++;
 	 
 	 if(posYobj1 > 6 || keepObj2Alive){
 		 
 		 posYobj2++;
 		 keepObj2Alive = 1;
+		 
+		  
+		  if(object[1].type == 1){
+			  if(posYobj2 < 128){
+				  removeCar(lcd, prevposXobj2, object[1].posY);
+				  drawCar(lcd, object[1].posX, posYobj2, object[1].rgb);
+				  object[1].posY = posYobj2;
+			  }
+			  } else {
+			  if(posYobj2 < 128){
+				  removeTruck(lcd, prevposXobj2, object[1].posY);
+				  drawTruck(lcd, object[1].posX, posYobj2, rgbcolor);
+				  object[1].posY = posYobj2;
+			  }
+		  }
 	 }
 	 
 	 if(posYobj1 > 12 || keepObj3Alive){
@@ -294,25 +185,48 @@
 		 posYobj3++;
 		 keepObj3Alive = 1;
 		 
+		 if(object[2].type == 1){
+			 if(posYobj3 < 128){
+				 removeCar(lcd, prevposXobj3, object[2].posY);
+				 drawCar(lcd, object[2].posX, posYobj3, object[2].rgb);
+				 object[2].posY = posYobj3;
+			 }
+			 } else {
+			 if(posYobj3 < 128){
+				 removeTruck(lcd, prevposXobj3, object[2].posY);
+				 drawTruck(lcd, object[2].posX, posYobj3, object[2].rgb);
+				 object[2].posY = posYobj3;
+			 }
+		 }
+		 
+		 
 	 }
-	 counter++;
+	 
+	 
+	 
+	 prevposXobj1 = object[0].posX;
+	 prevposXobj2 = object[1].posX;
+	 prevposXobj3 = object[2].posX;
+	 
  }
  
- 
-
-
 //main game loop 
 extern void showGame(MI0283QT9 lcd){
+	//setup seed
 	
+	uint16_t seed = (rand() % 65534) + 1;
+	srand(seed);
 	
+	//setup car
 	uint8_t x = 2;
 	uint8_t movCounter = 0;
 	uint8_t colored[] = {red,green,blue};
 	uint16_t score = 0;
-	uint16_t prevScore1 = 0;
-	uint16_t prevScore2 = 0;
-	uint16_t prevScore3 = 0;
 	uint8_t pSensitivity = 0;
+	
+	object[2];
+	//objects preGenObjects[128];
+
 	
 	if (sLow == 1)
 	{
@@ -320,7 +234,7 @@ extern void showGame(MI0283QT9 lcd){
 	} else if (sMedium == 1)
 	{
 		pSensitivity = 4;
-		} else if (sHigh == 1){
+	} else if (sHigh == 1){
 		pSensitivity = 3;
 	}
 	
@@ -328,9 +242,6 @@ extern void showGame(MI0283QT9 lcd){
 	showDefaultLayout(lcd);
 	
 	nun.nunchuck_init();
-	object[2];
-	objects preGenObjects[128];
-
 
 	posYobj1 = 0;
 	posYobj2 = 0;
@@ -343,13 +254,16 @@ extern void showGame(MI0283QT9 lcd){
 	keepObj2Alive = 0;
 	keepObj3Alive = 0;
 	
-	if(preTime){
-		preGeninit();
-	}
+	uint8_t carHitMax = 15;
+	uint8_t truckHitmax = 18;
 	
+	
+	uint8_t countDown = 3;
 	
 	//start game loop
 	while(1){
+		
+		
 		
 		if(returnToMain){
 			returnToMain = 0;
@@ -371,7 +285,7 @@ extern void showGame(MI0283QT9 lcd){
 			
 			
 			//Draw game road
-			object[2];
+			objects object[2];
 			objects preGenObjects[128];
 			
 			x = 2;
@@ -381,9 +295,7 @@ extern void showGame(MI0283QT9 lcd){
 			colored[1] = green;
 			colored[2] = blue;
 			score = 0;
-			prevScore1 = 0;
-			prevScore2 = 0;
-			prevScore3 = 0;
+			
 			pSensitivity = 0;
 			
 			if (sLow == 1)
@@ -401,7 +313,22 @@ extern void showGame(MI0283QT9 lcd){
 			
 			showDefaultLayout(lcd);
 			
+			onBeginB = 0;
 			restartGame = 0;
+			countDown = 3;
+		}
+		
+		//countdown before game start
+		while(countDown != 0){
+			lcd.drawInteger(centerText(" ", 3), 150, countDown, DEC, OBJECTCOLOR, BACKGROUND, 3);
+			_delay_ms(1000);
+			lcd.drawInteger(centerText(" ", 3), 150, countDown, DEC, BACKGROUND, BACKGROUND, 3);
+			if(countDown == 1){
+				lcd.drawText(centerText("START" , 3), 150, "START", OBJECTCOLOR, BACKGROUND, 3);
+				_delay_ms(1000);
+				lcd.drawText(centerText("START" , 3), 150, "START", BACKGROUND, BACKGROUND, 3);
+			}
+			countDown--;
 		}
 		//shows the enemy cars
 		showGenObjects(lcd);
@@ -409,90 +336,45 @@ extern void showGame(MI0283QT9 lcd){
 		//Draw player car at start location
 		drawCar(lcd, x, 12,colored);
 		
+		
+		
+		
 		//If obj1 is at you y location, check if objectx = playerx
-		if((object[0].type == 1 && posYobj1 >= 12 && posYobj1<17) || (object[0].type == 2 && posYobj1>= 12 && posYobj1<24)){
+		if((object[0].type == 1 && object[0].posY >= 12  && object[0].posY <= carHitMax ) || (object[0].type == 2 && object[0].posY >= 12 && object[0].posY <= truckHitmax)){
 			if (object[0].posX == x ) {
 				showGameOverMenu(lcd, score);
-				}else{
-				if (object[0].type == 1){
-					if (prevScore1 == 0)
-					{
-						score++;
-						prevScore1++;
-					}
-				}else if(object[0].type == 2){
-					if (prevScore1 == 0)
-					{
-						score = score + 2;
-						prevScore1++;
-					}
+			}else{
+				
+				if(object[0].posY == carHitMax  || object[0].posY == truckHitmax){
+					score = object[0].type + score;
 				}
+				
+				
 			}
-		}
-		
-		//If obj2 is at player y location, check if objectx = playerx
-		if((object[1].type == 1 && posYobj2 >= 12 && posYobj2<17) || (object[1].type == 2 && posYobj2>= 12 && posYobj2<24)){
+		}else if((object[1].type == 1 && object[1].posY >= 12 && object[1].posY <= carHitMax ) || (object[1].type == 2 && object[1].posY >= 12 && object[1].posY <= truckHitmax)){
+			//If obj2 is at player y location, check if objectx = playerx
 			if (object[1].posX == x) {				
 				showGameOverMenu(lcd,score);
 			}else{
-					
-				if (object[0].type == 1){
-					if (prevScore2 == 0)
-					{
-						if(setT){
-							score++;
-							prevScore2++;
-						} else {
-							score++;
-							prevScore2++;
-						}
-						
-					}
-				}
-				else if(object[0].type == 2)
-				{
-					if (prevScore2 == 0)
-					{
-						score = score + 2;
-						prevScore2++;
-					}
-				}
 				
-				
+				if(object[1].posY == carHitMax  || object[1].posY == truckHitmax){
+					score = object[1].type + score;
+				}
 			}
-		}
-		
-		//If obj3 is at player y location, check if objectx = playerx
-		if((object[2].type == 1 && posYobj3 >= 12 && posYobj3<17) || (object[2].type == 2 && posYobj3>= 12 && posYobj3<24)){
+		} else if((object[2].type == 1 && object[2].posY >= 12 && object[2].posY <= carHitMax ) || (object[2].type == 2 && object[2].posY >= 12 && object[2].posY <= truckHitmax)){
+			
+			//If obj3 is at player y location, check if objectx = playerx
 			if (object[2].posX == x) {
 				showGameOverMenu(lcd,score);
-				}else{
-				if (object[0].type == 1){
-					if (prevScore3 == 0)
-					{
-						score++;
-						prevScore3++;
-					}
-					}else if(object[0].type == 2){
-					if (prevScore3 == 0)
-					{
-						score = score + 2;
-						prevScore3++;
-					}
+			}else{
+				
+				if(object[2].posY == carHitMax || object[2].posY == truckHitmax){
+					score = object[2].type + score;
 				}
 			}
 		}
 		
-		if (posYobj1 == 1)
-		{
-			prevScore1 = 0;
-		}else if (posYobj2 == 1)
-		{
-			prevScore2 = 0;
-		}else if (posYobj3 == 1)
-		{
-			prevScore3 = 0;
-		}
+		
 		
 		//draws car at x depending on tilt, and y = 12 (front of car), y = 15 end of car
 		if(nun.retreive_data()){
@@ -504,7 +386,7 @@ extern void showGame(MI0283QT9 lcd){
 			
 			
 			//if nunchuck is tilted right, increment x
-			if((nun.getAccX() > 148 && setT) || (nun.getJoyX() > 150 && setY)){
+			if(nun.getAccX() > 148 || nun.getJoyX() > 150){
 				if(movCounter == 0){
 					removeCar(lcd, x, 12);
 					if(x<4){
@@ -521,7 +403,7 @@ extern void showGame(MI0283QT9 lcd){
 			}
 			//draw car at x location
 			//if nunchuck is tilted left, substract 1 from x
-			else if((nun.getAccX() > 70 && nun.getAccX() < 108 && setT) || (nun.getJoyX() < 90 && setY)){
+			else if((nun.getAccX() > 70 && nun.getAccX() < 108) || nun.getJoyX() < 90){
 				if(movCounter==0){
 					removeCar(lcd, x, 12);
 					if(x>0){
@@ -537,7 +419,7 @@ extern void showGame(MI0283QT9 lcd){
 				//draw car at x location
 				drawCar(lcd, x, 12, colored);
 				//if nunchuck is in middle, movCounter = 0
-				}else if(nun.getAccX() > 120 && nun.getAccX() < 136){
+			}else if(nun.getAccX() > 120 && nun.getAccX() < 136){
 				movCounter = 0;
 			}
 			

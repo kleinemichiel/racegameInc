@@ -74,6 +74,11 @@ objects object[2];
 		 onBeginB = 1;
 	 }
 	 //_delay_ms(150);
+	 
+	 /* 
+	 If you select hard mode the cars/trucks you have to dodge move on the x position. If the car/truck is on position 4 the car/truck will go left. If the car/truck is on position 0 the cars/trucks will go right.
+	 Otherwise the will go to a random direction.
+	 */
 	 if(hard == 1 && (posYobj1 % 12) == 0){
 		 uint8_t operatordefine;
 		 
