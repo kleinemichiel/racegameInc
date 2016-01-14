@@ -8,8 +8,8 @@
 
 extern void showGridLayout(MI0283QT9 lcd){
 	
-	for(int i=0; i<5; i++){
-		for(int i2 =0; i2<5; i2++){
+	for(int i=0; i<GRIDYLENGTH; i++){
+		for(int i2 =0; i2<GRIDXLENGTH; i2++){
 			lcd.drawRect(pixelPosX(i2), pixelPosY(i), 20+200/GRIDXLENGTH, 320/GRIDYLENGTH, RGB(255,255,255));
 		}
 	}

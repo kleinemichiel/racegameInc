@@ -14,6 +14,7 @@ extern void showPauseMenu(MI0283QT9 lcd){
 	while(1){
 		
 		
+		
 		lcd.drawText(centerText("Pause", 3), 15, "Pause", OBJECTCOLOR, BACKGROUND, 3);
 		if(drawButton(lcd, "Resume Game", 20, 75, 200, 40)){	
 			showDefaultLayout(lcd);
@@ -23,9 +24,7 @@ extern void showPauseMenu(MI0283QT9 lcd){
 			restartGame = 1;
 			break;
 		}	
-		if(drawButton(lcd, "Settings", 20, 195, 200, 40)){
-			showSettingMenu(lcd);
-		}
+		
 		if(drawButton(lcd, "Main Menu", 20, 255, 200, 40)){
 			returnToMain = 1;
 			break;

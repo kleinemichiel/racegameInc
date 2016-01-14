@@ -67,7 +67,7 @@ int main(){
 	
 	
 	//starts lcd -> rotates it 90 degrees, portret mode -> red background
-	lcd.begin();
+	lcd.begin(SPI_CLOCK_DIV2);
 	lcd.setOrientation(90);
 	
 	
@@ -83,6 +83,9 @@ int main(){
 		lcd.touchStartCal(); //calibrate touchpanel
 		writeCalData(); //write data to EEPROM
 	}
+	
+	//lcd.touchStartCal(); //calibrate touchpanel
+	//writeCalData(); //write data to EEPROM
 	
 	//sets background to red
 	lcd.fillScreen(BACKGROUND);

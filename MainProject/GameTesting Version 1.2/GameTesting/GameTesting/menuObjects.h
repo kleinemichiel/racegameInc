@@ -23,6 +23,7 @@ extern char drawCharSelector(MI0283QT9 lcd, uint16_t x, uint16_t y, char previou
 
 #endif /* MENUOBJECTS_H_ */
 
+
 //default colors
 #define OBJECTCOLOR RGB(255,0,0)
 #define BACKGROUND RGB(0,0,0)

@@ -52,86 +52,6 @@ objects object[2];
 		 genNewObjects(i);
 	 }
  }
- 
- 
-/*
-
- void preGeninit(){
-	 
-	 uint8_t counterPre =1;
-	 for(uint16_t i=0; i<128; i++){
-		 if(counterPre == 4){
-			 counterPre =1;
-		 }
-		 int RandomX = rand() % 5;
-		 int RandomType = rand() % 2+1;
-		 preGenObjects[i].posX = RandomX;
-		 preGenObjects[i].posY = 0;
-		 
-			uint8_t r = rand() % 105 + 150;
-			uint8_t g = rand() % 105 + 150;
-			uint8_t b = rand() % 105 + 150;
-			preGenObjects[i].rgb[0] = r;
-			preGenObjects[i].rgb[1] = g;
-			preGenObjects[i].rgb[2] = b;
-		 
-		 if(easy){
-			 preGenObjects[i].posX = RandomX;
-			 preGenObjects[i].type = 1;
-		 }else if(medium){
-		 	 preGenObjects[i].posX = RandomX;
-			 preGenObjects[i].type = RandomType;
-		 }else if(hard){
-			 preGenObjects[i].posX = RandomX;
-			 if(counterPre == 1){
-				 preGenObjects[i].type = 2;
-				 }else if(counterPre == 2){
-				 preGenObjects[i].type = 1;
-				 }else if(counterPre == 3){
-				 preGenObjects[i].type = 2;
-				 
-			 }
-			 counterPre++;
-			 
-		 }
-		 
-	 }
-	 
-	 object[0] = preGenObjects[0];
-	 object[1] = preGenObjects[1];
-	 object[2] = preGenObjects[2];
-
- }
-*/
-
-
- 
-/*
- uint8_t object1PreGen = 0;
- uint8_t object2PreGen = 0;
- uint8_t object3PreGen = 0;
- 
- void arrayShifter(uint8_t posOfObject){
-	 
-	 if((posOfObject * object1PreGen + 2) > 118){
-		  preGeninit();
-		  uint8_t object1PreGen = 0;
-		  uint8_t object2PreGen = 0;
-		  uint8_t object3PreGen = 0;
-	 } else {
-		  if(posOfObject == 0){
-			  object1PreGen++;
-			  object[posOfObject] = preGenObjects[1 * object1PreGen + 3];
-		  } else if(posOfObject == 1){
-			  object2PreGen++;
-			  object[posOfObject] = preGenObjects[2 * object2PreGen + 2];
-		  } else if(posOfObject == 2){
-			  object3PreGen++;
-			  object[posOfObject] = preGenObjects[3 * object3PreGen + 5];
-		  }
-	 }
-	
- }*/
 
 
  uint8_t posYobj1 = 0;
@@ -369,10 +289,8 @@ extern void showGame(MI0283QT9 lcd){
 			colored[0] = red;
 			colored[1] = green;
 			colored[2] = blue;
-			score = 0;/*
-			prevScore1 = 0;
-			prevScore2 = 0;
-			prevScore3 = 0;*/
+			score = 0;
+			
 			pSensitivity = 0;
 			
 			if (sLow == 1)

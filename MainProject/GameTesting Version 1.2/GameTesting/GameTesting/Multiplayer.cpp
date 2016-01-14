@@ -114,11 +114,11 @@ void connectToClient(MI0283QT9 lcd){
 			
 			
 			if(availableData){
-				
+				lcd.drawText(10, 160, "found data from client", OBJECTCOLOR, BACKGROUND,1);
 				uint8_t dataReceived = Wire.read();
 				timeOutCounter = 0;
 				hostFound = 0;
-				clientFound = dataReceived;
+				clientFound = 1;
 				break;
 			} else if(timeOutCounter > setTimeOut){
 				timeOutCounter = 0;
@@ -128,7 +128,7 @@ void connectToClient(MI0283QT9 lcd){
 				timeOutCounter++;
 			}
 			
-			_delay_ms(10);
+			_delay_ms(15);
 			
 	}
 	
@@ -166,10 +166,6 @@ void connectToHost(MI0283QT9 lcd){
 		_delay_ms(10);
 	}	
 	
-	clientFound = 0;
-	
-	
-	
 }
 
 
@@ -202,10 +198,14 @@ void showMpMenu(MI0283QT9 lcd){
 				connectToHost(lcd);
 				_delay_ms(10);
 				connectToHost(lcd);
+			} else {
+				connected(lcd);
 			}
 			
 			if(!hostFound){
 				connectToClient(lcd);
+			} else {
+				connected(lcd);
 			}
 		}
 		

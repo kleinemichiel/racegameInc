@@ -112,7 +112,7 @@ void showGameOverMenu(MI0283QT9 lcd, uint16_t score){
 	
 	int EEPROMfilled = 0;
 	
-	if(EEPROM.read(171) != 0 ){
+	if(EEPROM.read(174) != 0 ){
 		EEPROMfilled = 1;
 	}
 	
@@ -233,8 +233,5 @@ void showGameOverMenu(MI0283QT9 lcd, uint16_t score){
 			}
 		}
 		
-		
-		
-	
 	
 }
