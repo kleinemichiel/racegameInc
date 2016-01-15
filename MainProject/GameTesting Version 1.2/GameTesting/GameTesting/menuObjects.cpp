@@ -39,7 +39,7 @@ uint8_t drawButton(MI0283QT9 lcd, char text[], uint16_t x, uint16_t y, uint16_t 
 
 
 
-
+//creates a slider. If you click on the slider it will create a new fillrect on the position you touched.
 uint8_t drawSlider(MI0283QT9 lcd, uint16_t y, uint8_t sValue, uint8_t sRed, uint8_t sGreen, uint8_t sBlue){
 	
 	uint8_t sliderValue = sValue;
@@ -61,7 +61,7 @@ uint8_t drawSlider(MI0283QT9 lcd, uint16_t y, uint8_t sValue, uint8_t sRed, uint
 }
 
 
-//creates checkboxes which need a pointer to a int used as a bool, it changes it instead of returning
+//creates checkboxes which need a pointer to a int acting as a bool. If you press the checkbox it will get the objectcolor so it will be selected, or if it was already selected it will get the background color and will be not selected.
 void drawCheckbox(MI0283QT9 lcd, uint16_t x, uint16_t y, uint16_t s, uint8_t *setValue)
 {
 	
@@ -90,7 +90,7 @@ void drawCheckbox(MI0283QT9 lcd, uint16_t x, uint16_t y, uint16_t s, uint8_t *se
 	}
 }
 
-
+//function for center the text, you are able to center the text for every size you can choose.
 uint8_t centerText(char text[], uint8_t size){
 	if(size == 2){
 		uint8_t textWidth = (8 * strlen(text));
@@ -107,7 +107,7 @@ uint8_t centerText(char text[], uint8_t size){
 }	
 
 	
-
+//Creates a button. If you click on the button the next letter will be printed in the button.
 char buttonChar[] = "A";
 
 char drawCharSelector(MI0283QT9 lcd, uint16_t x, uint16_t y, char previous){

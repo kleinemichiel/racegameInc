@@ -7,6 +7,8 @@
 
 #pragma once
 
+#define ADDRESS 0x36
+/*In the includeMe.h are all files include. In every other file the inlcudeMe.h is included. Now we can use every function from every file in the file you want.*/
 #include <EEPROM.h>
 #include "stdint.h"
 #include "digitalWriteFast.h"
@@ -24,6 +26,7 @@
 #include "Default_Layout.h"
 #include "GridLayout.h"
 #include "GameObjects.h"
+#include "Multiplayer.h"
 #include "GameLoop.h"
 
 /*

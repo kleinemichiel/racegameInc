@@ -21,17 +21,16 @@ extern void removeTruck(MI0283QT9 lcd, uint8_t x, uint8_t y);
 //holds information for a car object
 struct car
 {
-	uint8_t lengte =1;
-	uint8_t score = lengte;
+	uint8_t score = 1;
 };
 
 //holds information for a truck object
 struct truck
 {
-	uint8_t lengte =2;
-	uint8_t score = lengte;
+	uint8_t score = 2;
 };
 
+//holds information for all the objects which are going to be printed on screen
 struct objects
 {
 	uint8_t posY;
@@ -41,7 +40,7 @@ struct objects
 	
 };
 
-//holds information for all the objects which are going to be printed on screen
+
 
 
 #endif /* INCFILE1_H_ */

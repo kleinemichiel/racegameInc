@@ -12,7 +12,6 @@
 uint8_t drawButton(MI0283QT9 lcd, char text[], uint16_t x, uint16_t y, uint16_t w, uint16_t h){
 	
 	uint16_t textWidth = (8 * strlen(text));
-	uint8_t buttonPressed = 0;
 	
 	lcd.touchRead();
 	
@@ -25,20 +24,22 @@ uint8_t drawButton(MI0283QT9 lcd, char text[], uint16_t x, uint16_t y, uint16_t 
 		
 		lcd.fillRect(x, y,w,h, BACKGROUND);
 		
-		buttonPressed = 1;
+		return 1;
 	
 	} else {
 		
 		lcd.drawRect(x, y,w,h, OBJECTCOLOR);
 		lcd.drawText(x + ((w / 2) - textWidth), (y + (h / 2) - 8) , text, OBJECTCOLOR, BACKGROUND, 2);
 		
-		buttonPressed = 0;
+		return 0;
 		
-	}
+	} 
 		
-	return buttonPressed;
 }
 
+
+
+//creates a slider. If you click on the slider it will create a new fillrect on the position you touched.
 uint8_t drawSlider(MI0283QT9 lcd, uint16_t y, uint8_t sValue, uint8_t sRed, uint8_t sGreen, uint8_t sBlue){
 	
 	uint8_t sliderValue = sValue;
@@ -53,14 +54,14 @@ uint8_t drawSlider(MI0283QT9 lcd, uint16_t y, uint8_t sValue, uint8_t sRed, uint
 		prevSliderValue = sliderValue;
 		sliderValue = (lcd.touchX()*1.0625);
 		lcd.fillRect((prevSliderValue*0.785)+10, y-5, 20,20, BACKGROUND);
-		lcd.drawRect(20,y,200,10, OBJECTCOLOR);
 		lcd.fillRect((sliderValue*0.785)+10, y-5, 20,20, OBJECTCOLOR);
 	}
 	
 	return sliderValue;
 }
 
-//creates checkboxes which need a pointer to a int used as a bool, it changes it instead of returning
+
+//creates checkboxes which need a pointer to a int acting as a bool. If you press the checkbox it will get the objectcolor so it will be selected, or if it was already selected it will get the background color and will be not selected.
 void drawCheckbox(MI0283QT9 lcd, uint16_t x, uint16_t y, uint16_t s, uint8_t *setValue)
 {
 	
@@ -89,11 +90,24 @@ void drawCheckbox(MI0283QT9 lcd, uint16_t x, uint16_t y, uint16_t s, uint8_t *se
 	}
 }
 
+//function for center the text, you are able to center the text for every size you can choose.
+uint8_t centerText(char text[], uint8_t size){
+	if(size == 2){
+		uint8_t textWidth = (8 * strlen(text));
+		return (240 / 2) - textWidth;
+	} else if(size == 3){
+		uint8_t textWidth = (12 * strlen(text));
+		return (240 / 2) - textWidth;
+	} else if(size == 1) {
+		uint8_t textWidth = (4 * strlen(text));
+		return (240 / 2) - textWidth;
+	} else {
+		return 0;
+	}
+}	
 
 	
-
-	
-
+//Creates a button. If you click on the button the next letter will be printed in the button.
 char buttonChar[] = "A";
 
 char drawCharSelector(MI0283QT9 lcd, uint16_t x, uint16_t y, char previous){
