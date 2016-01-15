@@ -11,6 +11,9 @@
  //type (1 = car, 2 = truck) same goes for points
 
 objects object[2];
+
+
+
 /*objects preGenObjects[128];*/
  // generates objects, parameter: position of object in array
  void genNewObjects(uint8_t objectReGen)
@@ -224,7 +227,7 @@ extern void showGame(MI0283QT9 lcd){
 	uint16_t score = 0;
 	uint8_t pSensitivity = 0;
 	
-	objects object[2];
+	  initGenObjects();
 	//objects preGenObjects[128];
 
 	
@@ -272,6 +275,8 @@ extern void showGame(MI0283QT9 lcd){
 		}
 		
 		if(restartGame){
+			
+			
 			posYobj1 = 0;
 			posYobj2 = 0;
 			posYobj3 = 0;
@@ -285,7 +290,7 @@ extern void showGame(MI0283QT9 lcd){
 			
 			
 			//Draw game road
-			objects object[2];
+			 initGenObjects();
 			
 			
 			x = 2;
