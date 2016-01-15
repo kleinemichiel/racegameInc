@@ -224,7 +224,7 @@ extern void showGame(MI0283QT9 lcd){
 	uint16_t score = 0;
 	uint8_t pSensitivity = 0;
 	
-	object[2];
+	objects object[2];
 	//objects preGenObjects[128];
 
 	
@@ -286,7 +286,7 @@ extern void showGame(MI0283QT9 lcd){
 			
 			//Draw game road
 			objects object[2];
-			objects preGenObjects[128];
+			
 			
 			x = 2;
 			
