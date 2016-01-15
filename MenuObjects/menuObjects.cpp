@@ -61,7 +61,7 @@ uint8_t drawSlider(MI0283QT9 lcd, uint16_t y, uint8_t sValue, uint8_t sRed, uint
 }
 
 
-//creates checkboxes which need a pointer to a int acting as a bool. If you press the checkbox it will get the objectcolor so it will be selected, or if it was already selected it will get the background color and will be not selected.
+//creates checkboxes which need a pointer to a int acting as a bool. The value of the pointer changes when you press the checkbox. If the value changes to 1 then the checkbox will be 'selected' and if the value changes to 0 then the checkbox will be 'not selected'.
 void drawCheckbox(MI0283QT9 lcd, uint16_t x, uint16_t y, uint16_t s, uint8_t *setValue)
 {
 	
