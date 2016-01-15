@@ -22,6 +22,10 @@ uint8_t drawButton(MI0283QT9 lcd, char text[], uint16_t x, uint16_t y, uint16_t 
 		lcd.fillRect(x, y,w,h, OBJECTCOLOR);
 		lcd.drawText(x + ((w / 2) - textWidth), (y + (h / 2) - 8) , text, BACKGROUND, OBJECTCOLOR, 2);
 		
+		_delay_ms(500);
+		
+		lcd.fillRect(x, y,w,h, BACKGROUND);
+		
 		returnvalue = 1;
 		
 	} 
