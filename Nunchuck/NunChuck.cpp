@@ -46,7 +46,7 @@ uint16_t NUNCHUCK::decode_data(uint16_t data){
 	return (data ^ 0x17) + 0x17;
 }
 
-//receives the data and puts it in the container
+//receives / retreives the data and puts it in the container
 uint8_t NUNCHUCK::retreive_data(){
 	
 	Wire.requestFrom(NUNADDRESS, 6);
@@ -136,6 +136,7 @@ uint8_t NUNCHUCK::getZ(){
 		return 0;
 	}
 }
+
 
 
 
